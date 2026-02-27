@@ -1,0 +1,31 @@
+Dear <%= @user.email.split('@').first.capitalize %>,
+
+This is a friendly reminder that your rental attire will be delivered tomorrow.
+
+DELIVERY INFORMATION
+--------------------
+Order Number: #<%= @order&.id %>
+<% if @booking %>
+Delivery Date: <%= @booking.start_date.strftime("%A, %B %d, %Y") %>
+Return Date: <%= @booking.end_date.strftime("%A, %B %d, %Y") %>
+<% end %>
+<% if @order %>
+Delivery Address: <%= @order.address %>
+<% end %>
+
+DELIVERY INSTRUCTIONS
+---------------------
+• Please keep the garment bag in a safe, dry place upon arrival
+• Inspect the attire upon delivery and report any concerns immediately
+• Our delivery partner will contact you 1 hour before arrival
+
+View your order: <%= ENV.fetch('FRONTEND_URL', 'http://localhost:3000') %>/orders/<%= @order&.id %>
+
+We wish you a beautiful celebration!
+
+Warm regards,
+The Vows & Veils Team
+
+---
+Vows & Veils | Premium Wedding Rental Attire
+Contact: support@vowsandveils.com | +91 98765 43210

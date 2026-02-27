@@ -1,0 +1,34 @@
+Dear <%= @user.email.split('@').first.capitalize %>,
+
+URGENT: Your rental attire from Vows & Veils is overdue for return.
+
+OVERDUE NOTICE
+--------------
+Order Number: #<%= @order&.id %>
+<% if @booking %>
+Original Return Date: <%= @booking.end_date.strftime("%A, %B %d, %Y") %>
+Days Overdue: <%= @metadata[:days_late] || 'N/A' %>
+<% end %>
+Late Fee: ₹<%= @metadata[:late_fee] || 500 %>
+
+IMMEDIATE ACTION REQUIRED
+-------------------------
+• A late fee of ₹<%= @metadata[:late_fee] || 500 %> has been applied to your order
+• Additional charges of ₹500/day will continue to accrue until return
+• Please contact us immediately to schedule urgent pickup
+• Failure to return within 7 days may result in full purchase price charge
+
+CONTACT US
+----------
+Phone: +91 98765 43210
+WhatsApp: +91 98765 43210
+Email: support@vowsandveils.com
+
+We value your business and want to resolve this matter amicably. Please respond at your earliest convenience.
+
+Regards,
+The Vows & Veils Collections Team
+
+---
+Vows & Veils | Premium Wedding Rental Attire
+Contact: support@vowsandveils.com | +91 98765 43210

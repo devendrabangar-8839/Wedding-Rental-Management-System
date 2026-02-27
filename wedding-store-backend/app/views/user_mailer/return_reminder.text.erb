@@ -1,0 +1,35 @@
+Dear <%= @user.email.split('@').first.capitalize %>,
+
+This is a gentle reminder that your rental attire is due for return tomorrow.
+
+RETURN INFORMATION
+------------------
+Order Number: #<%= @order&.id %>
+<% if @booking %>
+Return Date: <%= @booking.end_date.strftime("%A, %B %d, %Y") %>
+<% end %>
+<% if @order %>
+Pickup Address: <%= @order.address %>
+<% end %>
+Security Deposit: ₹<%= @order&.deposit_total %> (will be refunded within 3-5 business days)
+
+RETURN INSTRUCTIONS
+-------------------
+• Pack the attire carefully in the provided garment bag
+• Include all accessories that came with the outfit
+• Our pickup partner will collect the item from your address
+
+LATE RETURN POLICY
+------------------
+Returns after the due date will incur a late fee of ₹500 per day.
+
+View your order: <%= ENV.fetch('FRONTEND_URL', 'http://localhost:3000') %>/orders/<%= @order&.id %>
+
+Thank you for choosing Vows & Veils. We hope your celebration was memorable!
+
+Warm regards,
+The Vows & Veils Team
+
+---
+Vows & Veils | Premium Wedding Rental Attire
+Contact: support@vowsandveils.com | +91 98765 43210

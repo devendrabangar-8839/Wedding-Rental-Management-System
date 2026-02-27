@@ -25,6 +25,7 @@ gem "jwt"
 
 # Sidekiq for background jobs
 gem "sidekiq"
+gem "sidekiq-cron"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
@@ -50,6 +51,10 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  # Letter opener for development email preview [https://github.com/ryanb/letter_opener]
+  gem "letter_opener", "~> 1.9"
+  gem "letter_opener_web", "~> 3.0"
 end
 
 gem "rack-attack", "~> 6.8"

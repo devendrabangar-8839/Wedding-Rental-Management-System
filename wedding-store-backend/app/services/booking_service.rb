@@ -45,11 +45,13 @@ class BookingService
 
   def self.create_booking(user:, product_id:, start_date:, end_date:, size:, address:)
     product = Product.find(product_id)
-    
+
     unless available?(product_id, start_date, end_date, size)
       return { success: false, message: 'Product not available for selected dates/size' }
     end
 
+    order = nil
+    
     ActiveRecord::Base.transaction do
       # Pessimistic locking to prevent race conditions
       product.lock!
@@ -87,9 +89,14 @@ class BookingService
         status: 'active'
       )
 
-      { success: true, order: order }
+      # Queue booking confirmation email (non-blocking)
+      BookingConfirmationWorker.perform_async(order.id)
     end
+
+    { success: true, order: order }
   rescue => e
+    Rails.logger.error "[BookingService] Error creating booking: #{e.message}"
+    Rails.logger.error e.backtrace.join("\n") if Rails.env.development?
     { success: false, message: e.message }
   end
 end

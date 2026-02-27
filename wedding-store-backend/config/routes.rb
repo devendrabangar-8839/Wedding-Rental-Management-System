@@ -14,6 +14,10 @@ Rails.application.routes.draw do
   end
 
   get 'admin/dashboard_metrics', to: 'admin#dashboard_metrics'
+  get 'admin/calendar', to: 'admin#calendar'
+
+  # Letter Opener for previewing emails in development
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
   get "up" => "rails/health#show", as: :rails_health_check
 end

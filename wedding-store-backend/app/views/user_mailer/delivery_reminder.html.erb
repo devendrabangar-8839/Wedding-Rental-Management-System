@@ -1,0 +1,66 @@
+<p class="greeting">Dear <%= @user.email.split('@').first.capitalize %>,</p>
+
+<p class="message">
+  This is a friendly reminder that your rental attire from <strong>Vows & Veils</strong> 
+  will be <strong>delivered tomorrow</strong>. Please ensure someone is available at the delivery address.
+</p>
+
+<!-- Delivery Details -->
+<div class="order-box">
+  <h3>📦 Delivery Information</h3>
+  
+  <div class="order-row">
+    <span class="order-label">Order Number</span>
+    <span class="order-value">#<%= @order&.id %></span>
+  </div>
+  
+  <% if @booking %>
+  <div class="order-row">
+    <span class="order-label">Delivery Date</span>
+    <span class="order-value highlight"><%= @booking.start_date.strftime("%A, %B %d, %Y") %></span>
+  </div>
+  
+  <div class="order-row">
+    <span class="order-label">Return Date</span>
+    <span class="order-value"><%= @booking.end_date.strftime("%A, %B %d, %Y") %></span>
+  </div>
+  
+  <div class="order-row">
+    <span class="order-label">Product</span>
+    <span class="order-value"><%= @metadata[:product_name] || 'Your Rental Attire' %></span>
+  </div>
+  <% end %>
+  
+  <% if @order %>
+  <div class="order-row">
+    <span class="order-label">Delivery Address</span>
+    <span class="order-value"><%= @order.address %></span>
+  </div>
+  <% end %>
+</div>
+
+<!-- Info Box -->
+<div class="info-box">
+  <p>
+    <strong>Delivery Instructions:</strong><br>
+    • Please keep the garment bag in a safe, dry place upon arrival<br>
+    • Inspect the attire upon delivery and report any concerns immediately<br>
+    • Our delivery partner will contact you 1 hour before arrival
+  </p>
+</div>
+
+<!-- CTA Button -->
+<div style="text-align: center;">
+  <a href="<%= ENV.fetch('FRONTEND_URL', 'http://localhost:3000') %>/orders/<%= @order&.id %>" class="cta-button">
+    View Order Details
+  </a>
+</div>
+
+<p class="message" style="margin-top: 30px;">
+  We wish you a beautiful celebration!
+</p>
+
+<p class="message">
+  Warm regards,<br>
+  <strong>The Vows & Veils Team</strong>
+</p>

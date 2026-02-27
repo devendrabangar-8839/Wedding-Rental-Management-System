@@ -1,0 +1,76 @@
+<p class="greeting">Dear <%= @user.email.split('@').first.capitalize %>,</p>
+
+<p class="message">
+  This is a gentle reminder that your rental attire from <strong>Vows & Veils</strong> 
+  is due for <strong>return tomorrow</strong>. We appreciate your timely cooperation.
+</p>
+
+<!-- Return Details -->
+<div class="order-box">
+  <h3>🔄 Return Information</h3>
+  
+  <div class="order-row">
+    <span class="order-label">Order Number</span>
+    <span class="order-value">#<%= @order&.id %></span>
+  </div>
+  
+  <% if @booking %>
+  <div class="order-row">
+    <span class="order-label">Return Date</span>
+    <span class="order-value highlight"><%= @booking.end_date.strftime("%A, %B %d, %Y") %></span>
+  </div>
+  
+  <div class="order-row">
+    <span class="order-label">Product</span>
+    <span class="order-value"><%= @metadata[:product_name] || 'Your Rental Attire' %></span>
+  </div>
+  <% end %>
+  
+  <% if @order %>
+  <div class="order-row">
+    <span class="order-label">Pickup Address</span>
+    <span class="order-value"><%= @order.address %></span>
+  </div>
+  <% end %>
+  
+  <div class="order-row">
+    <span class="order-label">Security Deposit</span>
+    <span class="order-value">₹<%= @order&.deposit_total.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\1,').reverse %></span>
+  </div>
+</div>
+
+<!-- Info Box -->
+<div class="info-box">
+  <p>
+    <strong>Return Instructions:</strong><br>
+    • Pack the attire carefully in the provided garment bag<br>
+    • Include all accessories that came with the outfit<br>
+    • Our pickup partner will collect the item from your address<br>
+    • Security deposit will be refunded within 3-5 business days after inspection
+  </p>
+</div>
+
+<!-- Warning about late fees -->
+<div class="warning-box" style="background: #fef3c7; border-left-color: #f59e0b;">
+  <p style="color: #92400e;">
+    <strong>Late Return Policy:</strong><br>
+    Returns after the due date will incur a late fee of ₹500 per day. 
+    Please ensure timely return to avoid additional charges.
+  </p>
+</div>
+
+<!-- CTA Button -->
+<div style="text-align: center;">
+  <a href="<%= ENV.fetch('FRONTEND_URL', 'http://localhost:3000') %>/orders/<%= @order&.id %>" class="cta-button">
+    View Order Details
+  </a>
+</div>
+
+<p class="message" style="margin-top: 30px;">
+  Thank you for choosing <strong>Vows & Veils</strong>. We hope your celebration was memorable!
+</p>
+
+<p class="message">
+  Warm regards,<br>
+  <strong>The Vows & Veils Team</strong>
+</p>

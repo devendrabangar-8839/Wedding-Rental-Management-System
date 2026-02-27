@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_02_27_101514) do
+ActiveRecord::Schema[8.0].define(version: 2026_02_27_115257) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -51,6 +51,28 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_27_101514) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "order_id"
+    t.string "channel", null: false
+    t.string "notification_type", null: false
+    t.string "status", default: "pending", null: false
+    t.datetime "sent_at"
+    t.text "error_message"
+    t.jsonb "metadata", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel", "status"], name: "index_notifications_on_channel_and_status"
+    t.index ["channel"], name: "index_notifications_on_channel"
+    t.index ["created_at"], name: "index_notifications_on_created_at"
+    t.index ["notification_type", "status"], name: "index_notifications_on_notification_type_and_status"
+    t.index ["notification_type"], name: "index_notifications_on_notification_type"
+    t.index ["order_id"], name: "index_notifications_on_order_id"
+    t.index ["status"], name: "index_notifications_on_status"
+    t.index ["user_id", "status"], name: "index_notifications_on_user_id_and_status"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -128,6 +150,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_27_101514) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "users"
+  add_foreign_key "notifications", "orders"
+  add_foreign_key "notifications", "users"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "users"

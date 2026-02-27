@@ -1,0 +1,75 @@
+<p class="greeting">Dear <%= @user.email.split('@').first.capitalize %>,</p>
+
+<p class="message">
+  We are delighted to confirm your rental booking with <strong>Vows & Veils</strong>. 
+  Your exquisite attire has been reserved exclusively for your special occasion.
+</p>
+
+<!-- Order Details -->
+<div class="order-box">
+  <h3>📋 Booking Details</h3>
+  
+  <div class="order-row">
+    <span class="order-label">Order Number</span>
+    <span class="order-value">#<%= @order&.id %></span>
+  </div>
+  
+  <% if @booking %>
+  <div class="order-row">
+    <span class="order-label">Rental Period</span>
+    <span class="order-value"><%= @booking.start_date.strftime("%B %d, %Y") %> — <%= @booking.end_date.strftime("%B %d, %Y") %></span>
+  </div>
+  
+  <div class="order-row">
+    <span class="order-label">Size</span>
+    <span class="order-value"><%= @booking.size %></span>
+  </div>
+  <% end %>
+  
+  <% if @order %>
+  <div class="order-row">
+    <span class="order-label">Delivery Address</span>
+    <span class="order-value"><%= @order.address %></span>
+  </div>
+  
+  <div class="order-row">
+    <span class="order-label">Rental Amount</span>
+    <span class="order-value">₹<%= @order.total_price.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\1,').reverse %></span>
+  </div>
+  
+  <div class="order-row">
+    <span class="order-label">Security Deposit (Refundable)</span>
+    <span class="order-value">₹<%= @order.deposit_total.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\1,').reverse %></span>
+  </div>
+  
+  <div class="order-row">
+    <span class="order-label">Total Paid</span>
+    <span class="order-value highlight">₹<%= (@order.total_price + @order.deposit_total).to_s.reverse.gsub(/(\d{3})(?=\d)/, '\1,').reverse %></span>
+  </div>
+  <% end %>
+</div>
+
+<!-- Info Box -->
+<div class="info-box">
+  <p>
+    <strong>What's Next?</strong><br>
+    Our team will contact you within 24 hours to schedule your fitting appointment. 
+    Your attire will be professionally cleaned and prepared for your special day.
+  </p>
+</div>
+
+<!-- CTA Button -->
+<div style="text-align: center;">
+  <a href="<%= ENV.fetch('FRONTEND_URL', 'http://localhost:3000') %>/orders/<%= @order&.id %>" class="cta-button">
+    View Order Details
+  </a>
+</div>
+
+<p class="message" style="margin-top: 30px;">
+  Thank you for choosing <strong>Vows & Veils</strong>. We are honored to be part of your celebration.
+</p>
+
+<p class="message">
+  Warm regards,<br>
+  <strong>The Vows & Veils Team</strong>
+</p>

@@ -1,0 +1,80 @@
+<p class="greeting">Dear <%= @user.email.split('@').first.capitalize %>,</p>
+
+<p class="message" style="color: #dc2626;">
+  <strong>URGENT:</strong> Your rental attire from <strong>Vows & Veils</strong> is overdue for return. 
+  The return date has passed, and we have not yet received your item.
+</p>
+
+<!-- Late Notice Details -->
+<div class="order-box" style="border-color: #dc2626; background: #fef2f2;">
+  <h3 style="color: #dc2626;">⚠️ Overdue Notice</h3>
+  
+  <div class="order-row">
+    <span class="order-label">Order Number</span>
+    <span class="order-value">#<%= @order&.id %></span>
+  </div>
+  
+  <% if @booking %>
+  <div class="order-row">
+    <span class="order-label">Original Return Date</span>
+    <span class="order-value highlight" style="color: #dc2626;"><%= @booking.end_date.strftime("%A, %B %d, %Y") %></span>
+  </div>
+  
+  <div class="order-row">
+    <span class="order-label">Days Overdue</span>
+    <span class="order-value" style="color: #dc2626;"><%= @metadata[:days_late] || 'N/A' %> days</span>
+  </div>
+  <% end %>
+  
+  <div class="order-row">
+    <span class="order-label">Late Fee</span>
+    <span class="order-value highlight" style="color: #dc2626;">₹<%= @metadata[:late_fee].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\1,').reverse %></span>
+  </div>
+  
+  <% if @order %>
+  <div class="order-row">
+    <span class="order-label">Pickup Address</span>
+    <span class="order-value"><%= @order.address %></span>
+  </div>
+  <% end %>
+</div>
+
+<!-- Warning Box -->
+<div class="warning-box">
+  <p>
+    <strong>Immediate Action Required:</strong><br>
+    • A late fee of <strong>₹<%= @metadata[:late_fee] || 500 %></strong> has been applied to your order<br>
+    • Additional charges of ₹500/day will continue to accrue until return<br>
+    • Please contact us immediately to schedule urgent pickup<br>
+    • Failure to return within 7 days may result in full purchase price charge
+  </p>
+</div>
+
+<!-- CTA Buttons -->
+<div style="text-align: center; margin: 30px 0;">
+  <a href="tel:+919876543210" class="cta-button" style="background: #dc2626;">
+    📞 Call Us Now
+  </a>
+  <a href="https://wa.me/919876543210" class="cta-button" style="background: #25D366; margin-left: 10px;">
+    💬 WhatsApp
+  </a>
+</div>
+
+<div class="info-box" style="background: #f3f4f6; border-left-color: #6b7280;">
+  <p style="color: #4b5563;">
+    <strong>Need Help?</strong><br>
+    If you're experiencing any issues or have questions about your return, 
+    please contact our customer support team immediately at support@vowsandveils.com 
+    or call +91 98765 43210.
+  </p>
+</div>
+
+<p class="message" style="margin-top: 30px;">
+  We value your business and want to resolve this matter amicably. 
+  Please respond at your earliest convenience.
+</p>
+
+<p class="message">
+  Regards,<br>
+  <strong>The Vows & Veils Collections Team</strong>
+</p>

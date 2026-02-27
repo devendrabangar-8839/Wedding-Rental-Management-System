@@ -1,0 +1,32 @@
+Dear <%= @user.email.split('@').first.capitalize %>,
+
+We are delighted to confirm your rental booking with Vows & Veils.
+
+BOOKING DETAILS
+---------------
+Order Number: #<%= @order&.id %>
+<% if @booking %>
+Rental Period: <%= @booking.start_date.strftime("%B %d, %Y") %> to <%= @booking.end_date.strftime("%B %d, %Y") %>
+Size: <%= @booking.size %>
+<% end %>
+<% if @order %>
+Delivery Address: <%= @order.address %>
+Rental Amount: ₹<%= @order.total_price %>
+Security Deposit (Refundable): ₹<%= @order.deposit_total %>
+Total Paid: ₹<%= @order.total_price + @order.deposit_total %>
+<% end %>
+
+WHAT'S NEXT?
+------------
+Our team will contact you within 24 hours to schedule your fitting appointment.
+
+View your order: <%= ENV.fetch('FRONTEND_URL', 'http://localhost:3000') %>/orders/<%= @order&.id %>
+
+Thank you for choosing Vows & Veils. We are honored to be part of your celebration.
+
+Warm regards,
+The Vows & Veils Team
+
+---
+Vows & Veils | Premium Wedding Rental Attire
+Contact: support@vowsandveils.com | +91 98765 43210

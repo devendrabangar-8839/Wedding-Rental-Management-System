@@ -1,0 +1,35 @@
+# Sidekiq-cron job configuration
+# Format:
+#   job_name:
+#     cron: "cron_expression"
+#     class: "WorkerClassName"
+#     queue: "queue_name"
+#     description: "Human readable description"
+#
+# Cron format: minute hour day month day_of_week
+#
+# Schedule (IST - India Standard Time):
+# - Delivery reminders: 9:00 AM daily
+# - Return reminders: 9:05 AM daily
+# - Late return processing: 9:10 AM daily
+
+# Delivery Reminder - runs at 9:00 AM every day
+delivery_reminder:
+  cron: "0 9 * * *"
+  class: "DeliveryReminderWorker"
+  queue: notifications
+  description: "Send delivery reminders for orders starting tomorrow"
+
+# Return Reminder - runs at 9:05 AM every day
+return_reminder:
+  cron: "5 9 * * *"
+  class: "ReturnReminderWorker"
+  queue: notifications
+  description: "Send return reminders for orders due tomorrow"
+
+# Late Return Processing - runs at 9:10 AM every day
+late_return:
+  cron: "10 9 * * *"
+  class: "LateReturnWorker"
+  queue: notifications
+  description: "Process late returns and send late notices"
