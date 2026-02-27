@@ -7,27 +7,42 @@ class ProductsController < ApplicationController
     @products = Product.all
     @products = @products.search_by_name(params[:search])
     @products = @products.by_type(params[:type])
-    render json: @products
+    render json: @products.as_json(methods: [:image_url])
   end
 
   def show
-    render json: @product
+    render json: @product.as_json(methods: [:image_url])
   end
 
   def create
     @product = Product.new(product_params)
+    image_blob = params.dig(:product, :image)
+    
     if @product.save
+      if image_blob
+        @product.image.attach(image_blob)
+        @product.reload
+      end
       render json: @product, status: :created
     else
-      render json: @product.errors, status: :unprocessable_entity
+      render json: { error: @product.errors.full_messages.join(', ') }, status: :unprocessable_entity
     end
   end
 
   def update
+    image_blob = params.dig(:product, :image)
+    remove_image = params.dig(:product, :remove_image) == 'true'
+    
     if @product.update(product_params)
+      if image_blob
+        @product.image.attach(image_blob)
+        @product.reload
+      elsif remove_image
+        @product.image.purge if @product.image.attached?
+      end
       render json: @product
     else
-      render json: @product.errors, status: :unprocessable_entity
+      render json: { error: @product.errors.full_messages.join(', ') }, status: :unprocessable_entity
     end
   end
 
@@ -43,6 +58,6 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :description, :product_type, :rent_price, :sale_price, :security_deposit, :total_quantity, :active, sizes: [])
+    params.require(:product).permit(:name, :description, :product_type, :rent_price, :sale_price, :security_deposit, :total_quantity, :active, sizes: [], image: [])
   end
 end

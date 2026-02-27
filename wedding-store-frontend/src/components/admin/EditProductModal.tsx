@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -21,31 +21,76 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { api } from '@/lib/api';
-import { Check, Loader2, Upload, Image as ImageIcon, X } from 'lucide-react';
+import { Check, Loader2, Upload, X } from 'lucide-react';
 
-interface AddProductModalProps {
+interface Product {
+  id: number;
+  name: string;
+  description: string;
+  product_type: 'rent' | 'sell' | 'both';
+  rent_price: number;
+  sale_price: number;
+  security_deposit: number;
+  total_quantity: number;
+  sizes: string[];
+  active: boolean;
+  image_url?: string;
+}
+
+interface EditProductModalProps {
+  product: Product | null;
   isOpen: boolean;
   onClose: () => void;
   onSuccess: () => void;
 }
 
-export const AddProductModal = ({ isOpen, onClose, onSuccess }: AddProductModalProps) => {
+export const EditProductModal = ({ product, isOpen, onClose, onSuccess }: EditProductModalProps) => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [existingImageUrl, setExistingImageUrl] = useState<string | null>(null);
+  const [removeImage, setRemoveImage] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [formData, setFormData] = useState({
     name: '',
     description: '',
-    product_type: 'both',
+    product_type: 'both' as 'rent' | 'sell' | 'both',
     rent_price: '',
     sale_price: '',
     security_deposit: '',
     total_quantity: '1',
-    sizes: 'S,M,L,XL'
+    sizes: ''
   });
+
+  const getProductImage = (prod: Product): string => {
+    if (prod.image_url) {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+      // Add updated_at timestamp to prevent caching
+      const timestamp = prod.updated_at ? new Date(prod.updated_at).getTime() : Date.now();
+      return `${apiUrl}${prod.image_url}${prod.image_url.includes('?') ? '&' : '?'}v=${timestamp}`;
+    }
+    return '';
+  };
+
+  useEffect(() => {
+    if (product) {
+      setFormData({
+        name: product.name,
+        description: product.description || '',
+        product_type: product.product_type,
+        rent_price: product.rent_price?.toString() || '',
+        sale_price: product.sale_price?.toString() || '',
+        security_deposit: product.security_deposit?.toString() || '',
+        total_quantity: product.total_quantity?.toString() || '1',
+        sizes: product.sizes?.join(', ') || ''
+      });
+      const fullImageUrl = product.image_url ? getProductImage(product) : null;
+      setExistingImageUrl(fullImageUrl);
+      setImagePreview(fullImageUrl);
+    }
+  }, [product]);
 
   const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -59,6 +104,7 @@ export const AddProductModal = ({ isOpen, onClose, onSuccess }: AddProductModalP
         return;
       }
       setSelectedImage(file);
+      setRemoveImage(false);
       const reader = new FileReader();
       reader.onloadend = () => {
         setImagePreview(reader.result as string);
@@ -68,16 +114,24 @@ export const AddProductModal = ({ isOpen, onClose, onSuccess }: AddProductModalP
     }
   };
 
-  const removeImage = () => {
+  const handleRemoveImage = () => {
     setSelectedImage(null);
     setImagePreview(null);
+    setRemoveImage(true);
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
   };
 
+  const handleCancelRemoveImage = () => {
+    setRemoveImage(false);
+    setImagePreview(existingImageUrl);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!product) return;
+    
     setLoading(true);
     setError(null);
     try {
@@ -89,14 +143,17 @@ export const AddProductModal = ({ isOpen, onClose, onSuccess }: AddProductModalP
       submitData.append('product[sale_price]', (parseFloat(formData.sale_price) || 0).toString());
       submitData.append('product[security_deposit]', (parseFloat(formData.security_deposit) || 0).toString());
       submitData.append('product[total_quantity]', (parseInt(formData.total_quantity) || 1).toString());
-      formData.sizes.split(',').forEach((size, index) => {
+      formData.sizes.split(',').forEach((size) => {
         submitData.append(`product[sizes][]`, size.trim());
       });
+      
       if (selectedImage) {
         submitData.append('product[image]', selectedImage);
+      } else if (removeImage) {
+        submitData.append('product[remove_image]', 'true');
       }
 
-      await api.post('/products', submitData, {
+      await api.put(`/products/${product.id}`, submitData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -106,36 +163,30 @@ export const AddProductModal = ({ isOpen, onClose, onSuccess }: AddProductModalP
         setSuccess(false);
         setSelectedImage(null);
         setImagePreview(null);
-        setFormData({
-          name: '',
-          description: '',
-          product_type: 'both',
-          rent_price: '',
-          sale_price: '',
-          security_deposit: '',
-          total_quantity: '1',
-          sizes: 'S,M,L,XL'
-        });
+        setExistingImageUrl(null);
+        setRemoveImage(false);
         onSuccess();
         onClose();
       }, 1500);
     } catch (err: any) {
-      const errorMsg = err.response?.data?.error?.message || err.response?.data?.message || 'Failed to add product';
+      const errorMsg = err.response?.data?.error?.message || err.response?.data?.message || 'Failed to update product';
       setError(errorMsg);
     } finally {
       setLoading(false);
     }
   };
 
+  if (!product) return null;
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-xl rounded-[3rem] p-10 border-none shadow-2xl">
         <DialogHeader className="space-y-4">
           <DialogTitle className="text-4xl font-black uppercase tracking-tighter">
-            Add <span className="text-primary italic">Couture</span>
+            Edit <span className="text-primary italic">Couture</span>
           </DialogTitle>
           <DialogDescription className="text-lg font-medium italic">
-            Enter the details of the new masterpiece.
+            Update the details of your masterpiece.
           </DialogDescription>
         </DialogHeader>
 
@@ -144,7 +195,7 @@ export const AddProductModal = ({ isOpen, onClose, onSuccess }: AddProductModalP
             <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center text-green-600">
               <Check className="h-10 w-10" />
             </div>
-            <p className="font-black uppercase tracking-widest text-xl">Asset Manifested!</p>
+            <p className="font-black uppercase tracking-widest text-xl">Asset Updated!</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6 mt-4">
@@ -166,7 +217,7 @@ export const AddProductModal = ({ isOpen, onClose, onSuccess }: AddProductModalP
 
               <div className="space-y-2">
                 <Label className="text-xs font-black uppercase tracking-widest text-muted-foreground ml-1">Type</Label>
-                <Select value={formData.product_type} onValueChange={v => setFormData({ ...formData, product_type: v })}>
+                <Select value={formData.product_type} onValueChange={v => setFormData({ ...formData, product_type: v as 'rent' | 'sell' | 'both' })}>
                   <SelectTrigger className="h-14 rounded-2xl bg-secondary/30 border-none font-medium">
                     <SelectValue />
                   </SelectTrigger>
@@ -239,28 +290,40 @@ export const AddProductModal = ({ isOpen, onClose, onSuccess }: AddProductModalP
                     accept="image/*"
                     onChange={handleImageSelect}
                     className="hidden"
-                    id="product-image"
+                    id="edit-product-image"
                   />
-                  {imagePreview ? (
+                  {imagePreview && !removeImage ? (
                     <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-secondary/20 border-2 border-primary/20">
                       <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
                       <button
                         type="button"
-                        onClick={removeImage}
+                        onClick={handleRemoveImage}
                         className="absolute top-3 right-3 w-8 h-8 rounded-full bg-rose-500 text-white flex items-center justify-center hover:bg-rose-600 transition-colors shadow-lg"
                       >
                         <X className="h-4 w-4" />
                       </button>
                     </div>
+                  ) : removeImage ? (
+                    <div className="aspect-[4/3] rounded-2xl border-2 border-dashed border-primary/30 bg-secondary/20 flex flex-col items-center justify-center">
+                      <p className="text-sm font-black uppercase tracking-widest text-muted-foreground mb-4">Image will be removed</p>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={handleCancelRemoveImage}
+                        className="rounded-full px-6"
+                      >
+                        Cancel Removal
+                      </Button>
+                    </div>
                   ) : (
                     <label
-                      htmlFor="product-image"
+                      htmlFor="edit-product-image"
                       className="flex flex-col items-center justify-center aspect-[4/3] rounded-2xl border-2 border-dashed border-primary/30 bg-secondary/20 cursor-pointer hover:border-primary/60 hover:bg-secondary/40 transition-all group"
                     >
                       <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
                         <Upload className="h-8 w-8" />
                       </div>
-                      <p className="mt-4 text-sm font-black uppercase tracking-widest text-muted-foreground">Click to upload image</p>
+                      <p className="mt-4 text-sm font-black uppercase tracking-widest text-muted-foreground">Click to upload new image</p>
                       <p className="mt-1 text-[10px] font-bold text-muted-foreground">PNG, JPG up to 5MB</p>
                     </label>
                   )}
@@ -274,7 +337,7 @@ export const AddProductModal = ({ isOpen, onClose, onSuccess }: AddProductModalP
                 disabled={loading}
                 className="w-full h-16 rounded-full font-black uppercase tracking-widest bg-primary shadow-xl shadow-primary/20 hover:scale-[1.02] transition-all"
               >
-                {loading ? <Loader2 className="animate-spin h-6 w-6" /> : 'Manifest Asset'}
+                {loading ? <Loader2 className="animate-spin h-6 w-6" /> : 'Save Changes'}
               </Button>
             </DialogFooter>
           </form>

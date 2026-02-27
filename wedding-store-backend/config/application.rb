@@ -29,5 +29,8 @@ module WeddingStoreBackend
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     config.middleware.use Rack::Attack
+    
+    # Configure default URL options for Active Storage
+    config.action_mailer.default_url_options = { host: 'localhost:3001' }
   end
 end

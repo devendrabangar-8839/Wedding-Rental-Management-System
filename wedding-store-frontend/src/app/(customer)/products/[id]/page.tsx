@@ -8,13 +8,24 @@ import { Button } from '@/components/ui/button';
 import { BookingModal } from '@/components/booking/BookingModal';
 import { ShoppingBag, ChevronLeft, ShieldCheck, Heart, Share2, Sparkles, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
-import Image from 'next/image';
 
 export default function ProductDetailPage() {
   const { id } = useParams();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const getProductImage = (prod: Product): string => {
+    if (prod.image_url) {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+      // Add updated_at timestamp to prevent caching
+      const timestamp = prod.updated_at ? new Date(prod.updated_at).getTime() : Date.now();
+      return `${apiUrl}${prod.image_url}${prod.image_url.includes('?') ? '&' : '?'}v=${timestamp}`;
+    }
+    if (prod.name === 'Maharani Gold Lehenga') return '/lehenga.png';
+    if (prod.name === 'Midnight Blue Sherwani') return '/sherwani.png';
+    return 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800&q=80';
+  };
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -33,6 +44,8 @@ export default function ProductDetailPage() {
 
   if (loading || !product) return <div className="p-20 text-center font-black animate-pulse">PREPARING SELECTION...</div>;
 
+  const imageUrl = getProductImage(product);
+
   return (
     <div className="container mx-auto px-4 py-16 max-w-7xl">
       <Link href="/products" className="inline-flex items-center text-xs font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-primary transition-colors mb-12">
@@ -43,12 +56,10 @@ export default function ProductDetailPage() {
         {/* Left: Gallery */}
         <div className="lg:col-span-7 space-y-6">
           <div className="relative aspect-[3/4] rounded-[3rem] overflow-hidden shadow-2xl bg-secondary/20">
-            <Image
-              src={product.name === 'Maharani Gold Lehenga' ? '/lehenga.png' : product.name === 'Midnight Blue Sherwani' ? '/sherwani.png' : 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800&q=80'}
+            <img
+              src={imageUrl}
               alt={product.name}
-              fill
-              className="object-cover"
-              priority
+              className="w-full h-full object-cover"
             />
             <div className="absolute top-8 right-8 flex flex-col gap-4">
               <Button variant="secondary" size="icon" className="rounded-full shadow-lg hover:scale-110 transition-transform">
@@ -63,11 +74,10 @@ export default function ProductDetailPage() {
           <div className="grid grid-cols-4 gap-6">
             {[...Array(4)].map((_, i) => (
               <div key={i} className="aspect-square relative rounded-2xl overflow-hidden cursor-pointer hover:ring-2 ring-primary transition-all opacity-60 hover:opacity-100">
-                <Image
-                  src={product.name === 'Maharani Gold Lehenga' ? '/lehenga.png' : product.name === 'Midnight Blue Sherwani' ? '/sherwani.png' : 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800&q=80'}
+                <img
+                  src={imageUrl}
                   alt="Thumb"
-                  fill
-                  className="object-cover"
+                  className="w-full h-full object-cover"
                 />
               </div>
             ))}

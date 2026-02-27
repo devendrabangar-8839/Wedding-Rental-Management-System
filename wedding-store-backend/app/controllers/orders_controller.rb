@@ -4,13 +4,13 @@ class OrdersController < ApplicationController
 
   def index
     if @current_user.admin?
-      @orders = Order.preload(:user, order_items: :product).all.order(created_at: :desc)
+      @orders = Order.preload(:user, order_items: [:product, :rental_booking]).all.order(created_at: :desc)
     else
-      @orders = @current_user.orders.preload(order_items: :product).order(created_at: :desc)
+      @orders = @current_user.orders.preload(order_items: [:product, :rental_booking]).order(created_at: :desc)
     end
-    render json: @orders.as_json(include: { 
+    render json: @orders.as_json(include: {
       user: { only: [:email] },
-      order_items: { include: :product }
+      order_items: { include: [:product, :rental_booking] }
     })
   end
 
@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
 
   def show
     if @current_user.admin? || @order.user_id == @current_user.id
-      render json: @order.as_json(include: { order_items: { include: :product } })
+      render json: @order.as_json(include: { order_items: { include: [:product, :rental_booking] } })
     else
       render json: { error: 'Unauthorized' }, status: :unauthorized
     end

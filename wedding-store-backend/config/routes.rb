@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   post 'login', to: 'auth#login'
-  
+
+  # Active Storage Direct Upload
+  mount ActiveStorage::Engine => '/rails/active_storage'
+
   resources :products
   resources :rental_bookings, only: [:create]
   resources :orders, only: [:index, :show, :create, :update] do

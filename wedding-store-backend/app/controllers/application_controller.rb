@@ -13,8 +13,8 @@ class ApplicationController < ActionController::API
 
   def authenticate_user
     header = request.headers['Authorization']
-    header = header.split(' ').last if header
-    decoded = JsonWebToken.decode(header)
+    token = header&.split(' ')&.last
+    decoded = JsonWebToken.decode(token)
     @current_user = User.find(decoded[:user_id]) if decoded
 
     render_error('Unauthorized', :unauthorized, 'auth_required') unless @current_user

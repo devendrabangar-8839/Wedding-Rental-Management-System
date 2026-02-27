@@ -15,6 +15,7 @@ export default function ProductListingPage() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [filteredType, setFilteredType] = useState<string | null>(null);
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const { user } = useAuth();
 
   useEffect(() => {
@@ -61,11 +62,11 @@ export default function ProductListingPage() {
                 className="pl-12 h-14 rounded-2xl border-none bg-secondary/30 shadow-sm focus:ring-primary font-medium"
               />
             </div>
-            {user?.role === 'admin' && (
+            {/* {user?.role === 'admin' && (
               <Button className="h-14 px-8 rounded-2xl font-black uppercase tracking-widest bg-primary shadow-xl shadow-primary/20 hover:scale-105 transition-all">
                 <Plus className="mr-2 h-5 w-5" /> Add
               </Button>
-            )}
+            )} */}
           </div>
         </div>
 
@@ -99,10 +100,10 @@ export default function ProductListingPage() {
           </div>
 
           <div className="flex items-center gap-4 bg-secondary/30 p-1.5 rounded-full">
-            <Button size="icon" variant="ghost" className="rounded-full h-10 w-10 bg-primary text-white shadow-lg shadow-primary/20">
+            <Button size="icon" variant="ghost" className="rounded-full h-10 w-10 bg-primary text-white shadow-lg shadow-primary/20" onClick={() => setViewMode('grid')}>
               <Grid className="h-4 w-4" />
             </Button>
-            <Button size="icon" variant="ghost" className="rounded-full h-10 w-10">
+            <Button size="icon" variant="ghost" className="rounded-full h-10 w-10" onClick={() => setViewMode('list')}>
               <List className="h-4 w-4" />
             </Button>
           </div>
@@ -119,6 +120,12 @@ export default function ProductListingPage() {
                   <Skeleton className="h-6 w-1/2 rounded-lg" />
                 </div>
               </div>
+            ))}
+          </div>
+        ) : viewMode === 'list' ? (
+          <div className="flex flex-col gap-6">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} viewMode="list" />
             ))}
           </div>
         ) : (
