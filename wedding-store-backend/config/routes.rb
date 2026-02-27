@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   mount ActiveStorage::Engine => '/rails/active_storage'
 
   resources :products
-  resources :rental_bookings, only: [:create]
+  resources :rental_bookings, only: [:create] do
+    get 'availability', on: :collection
+  end
   resources :orders, only: [:index, :show, :create, :update] do
     get 'my_orders', on: :collection
   end

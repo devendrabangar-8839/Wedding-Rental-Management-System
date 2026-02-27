@@ -2,7 +2,7 @@ class BookingService
   def self.available?(product_id, start_date, end_date, size)
     product = Product.find(product_id)
     return false unless product.active
-    
+
     # Check if size is available for this product
     return false unless product.sizes.include?(size)
 
@@ -14,11 +14,30 @@ class BookingService
 
     # For MVP Phase 1: We assume each size-item is unique or total_quantity is 1 per size configuration if not specified otherwise.
     # However, if total_quantity > 1, we can have multiple bookings for the same range.
-    # Let's assume total_quantity is the total stock across all sizes for simplicity, 
+    # Let's assume total_quantity is the total stock across all sizes for simplicity,
     # OR we can treat it as stock per size if we want to be more granular.
     # PRD says "Set total quantity", so we'll compare overlapping bookings with total_quantity.
-    
+
     overlapping_bookings < product.total_quantity
+  end
+
+  def self.get_booked_dates(product_id, size)
+    product = Product.find_by(id: product_id)
+    return [] unless product
+
+    bookings = RentalBooking.where(product_id: product_id, size: size, status: 'active')
+                            .select(:start_date, :end_date)
+
+    booked_dates = []
+    bookings.each do |booking|
+      current_date = booking.start_date.to_date
+      while current_date <= booking.end_date.to_date
+        booked_dates << current_date.to_s
+        current_date += 1.day
+      end
+    end
+
+    booked_dates.uniq
   end
 
   def self.create_booking(user:, product_id:, start_date:, end_date:, size:, address:)
