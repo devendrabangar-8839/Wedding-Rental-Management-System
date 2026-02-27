@@ -1,0 +1,41 @@
+<svg viewBox="0 0 800 1000" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#faf3e8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color="#ede0d0;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#grad4)"/>
+  
+  <!-- Central decorative element -->
+  <g transform="translate(400, 350)">
+    <!-- Outer ring -->
+    <circle r="180" fill="none" stroke="#d4a574" stroke-width="2" opacity="0.3"/>
+    
+    <!-- Floral pattern -->
+    <g fill="#d4a574" opacity="0.4">
+      <circle cx="0" cy="-120" r="15"/>
+      <circle cx="0" cy="120" r="15"/>
+      <circle cx="-120" cy="0" r="15"/>
+      <circle cx="120" cy="0" r="15"/>
+      <circle cx="-85" cy="-85" r="12"/>
+      <circle cx="85" cy="-85" r="12"/>
+      <circle cx="-85" cy="85" r="12"/>
+      <circle cx="85" cy="85" r="12"/>
+    </g>
+    
+    <!-- Inner design -->
+    <circle r="80" fill="none" stroke="#d4a574" stroke-width="1" opacity="0.5"/>
+    <circle r="40" fill="#d4a574" opacity="0.3"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="400" y="650" font-family="Georgia, serif" font-size="46" font-weight="bold" fill="#8b6f47" text-anchor="middle">500+</text>
+  <text x="400" y="710" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#8b6f47" text-anchor="middle">Happy Couples</text>
+  
+  <text x="400" y="770" font-family="Arial, sans-serif" font-size="15" fill="#a08060" text-anchor="middle">Trusted by couples across India</text>
+  
+  <!-- Decorative lines -->
+  <line x1="200" y1="680" x2="350" y2="680" stroke="#d4a574" stroke-width="1" opacity="0.5"/>
+  <line x1="450" y1="680" x2="600" y2="680" stroke="#d4a574" stroke-width="1" opacity="0.5"/>
+</svg>

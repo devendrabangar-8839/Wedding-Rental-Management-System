@@ -25,8 +25,8 @@ export const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-10">
             <Link href="/products" className="text-sm font-black uppercase tracking-widest hover:text-primary transition-colors">Collections</Link>
-            <Link href="#process" className="text-sm font-black uppercase tracking-widest hover:text-primary transition-colors">Process</Link>
-            <Link href="#" className="text-sm font-black uppercase tracking-widest hover:text-primary transition-colors">About</Link>
+            <Link href="/about#process" className="text-sm font-black uppercase tracking-widest hover:text-primary transition-colors">Process</Link>
+            <Link href="/about" className="text-sm font-black uppercase tracking-widest hover:text-primary transition-colors">About</Link>
 
             <div className="relative w-64 group">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
@@ -49,11 +49,18 @@ export const Navbar = () => {
                   </Button>
                 </>
               ) : (
-                <Link href="/login">
-                  <Button className="rounded-full px-8 font-black uppercase text-xs tracking-widest bg-primary hover:scale-105 transition-transform shadow-lg shadow-primary/20">
-                    Sign In
-                  </Button>
-                </Link>
+                <div className="flex items-center space-x-3">
+                  <Link href="/signup">
+                    <Button variant="outline" className="rounded-full px-6 font-black uppercase text-xs tracking-widest border-primary/30 hover:bg-primary/5">
+                      Sign Up
+                    </Button>
+                  </Link>
+                  <Link href="/login">
+                    <Button className="rounded-full px-8 font-black uppercase text-xs tracking-widest bg-primary hover:scale-105 transition-transform shadow-lg shadow-primary/20">
+                      Sign In
+                    </Button>
+                  </Link>
+                </div>
               )}
             </div>
           </div>
@@ -72,8 +79,8 @@ export const Navbar = () => {
         <div className="md:hidden bg-background border-t border-primary/5 p-6 space-y-6 animate-in slide-in-from-top duration-300">
           <div className="flex flex-col space-y-4">
             <Link href="/products" className="text-lg font-black uppercase tracking-[0.2em]" onClick={() => setIsMenuOpen(false)}>Collections</Link>
-            <Link href="#process" className="text-lg font-black uppercase tracking-[0.2em]" onClick={() => setIsMenuOpen(false)}>Process</Link>
-            <Link href="#" className="text-lg font-black uppercase tracking-[0.2em]" onClick={() => setIsMenuOpen(false)}>About</Link>
+            <Link href="/about#process" className="text-lg font-black uppercase tracking-[0.2em]" onClick={() => setIsMenuOpen(false)}>Process</Link>
+            <Link href="/about" className="text-lg font-black uppercase tracking-[0.2em]" onClick={() => setIsMenuOpen(false)}>About</Link>
           </div>
           <div className="pt-6 border-t border-primary/5 flex flex-col space-y-4">
             {user ? (
@@ -86,9 +93,14 @@ export const Navbar = () => {
                 </button>
               </>
             ) : (
-              <Link href="/login" onClick={() => setIsMenuOpen(false)}>
-                <Button className="w-full h-14 rounded-2xl font-black uppercase tracking-widest bg-primary">Sign In</Button>
-              </Link>
+              <div className="flex flex-col space-y-3">
+                <Link href="/signup" onClick={() => setIsMenuOpen(false)}>
+                  <Button variant="outline" className="w-full h-14 rounded-2xl font-black uppercase tracking-widest border-primary/30">Sign Up</Button>
+                </Link>
+                <Link href="/login" onClick={() => setIsMenuOpen(false)}>
+                  <Button className="w-full h-14 rounded-2xl font-black uppercase tracking-widest bg-primary">Sign In</Button>
+                </Link>
+              </div>
             )}
           </div>
         </div>

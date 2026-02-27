@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   post 'login', to: 'auth#login'
+  post 'register', to: 'auth#register'
 
   # Active Storage Direct Upload
   mount ActiveStorage::Engine => '/rails/active_storage'

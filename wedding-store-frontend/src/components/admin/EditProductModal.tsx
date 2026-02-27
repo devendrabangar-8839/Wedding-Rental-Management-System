@@ -22,20 +22,7 @@ import {
 } from '@/components/ui/select';
 import { api } from '@/lib/api';
 import { Check, Loader2, Upload, X } from 'lucide-react';
-
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  product_type: 'rent' | 'sell' | 'both';
-  rent_price: number;
-  sale_price: number;
-  security_deposit: number;
-  total_quantity: number;
-  sizes: string[];
-  active: boolean;
-  image_url?: string;
-}
+import type { Product } from '@/types';
 
 interface EditProductModalProps {
   product: Product | null;
@@ -68,7 +55,7 @@ export const EditProductModal = ({ product, isOpen, onClose, onSuccess }: EditPr
     if (prod.image_url) {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
       // Add updated_at timestamp to prevent caching
-      const timestamp = prod.updated_at ? new Date(prod.updated_at).getTime() : Date.now();
+      const timestamp = prod.updated_at != null ? new Date(prod.updated_at).getTime() : Date.now();
       return `${apiUrl}${prod.image_url}${prod.image_url.includes('?') ? '&' : '?'}v=${timestamp}`;
     }
     return '';

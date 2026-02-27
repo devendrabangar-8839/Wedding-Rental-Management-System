@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { ShieldCheck, User as UserIcon, Lock } from 'lucide-react';
+import Link from 'next/link';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -85,7 +86,7 @@ export default function LoginPage() {
               </div>
             </div>
           </CardContent>
-          <CardFooter className="px-10 pb-12 pt-0">
+          <CardFooter className="px-10 pb-12 pt-0 flex flex-col gap-4">
             <Button
               type="submit"
               className="w-full h-20 rounded-2xl text-xl font-black shadow-2xl shadow-primary/20 hover:scale-102 active:scale-98 transition-all"
@@ -93,6 +94,12 @@ export default function LoginPage() {
             >
               {loading ? 'Authorizing...' : 'Grant Access'}
             </Button>
+            <div className="text-center text-sm">
+              <span className="text-muted-foreground font-medium">Don't have an account?</span>{' '}
+              <Link href="/signup" className="text-primary font-black hover:underline">
+                Sign Up
+              </Link>
+            </div>
           </CardFooter>
         </form>
       </Card>

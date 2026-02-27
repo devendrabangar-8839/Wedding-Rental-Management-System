@@ -25,19 +25,22 @@ class BookingService
     product = Product.find_by(id: product_id)
     return [] unless product
 
-    bookings = RentalBooking.where(product_id: product_id, size: size, status: 'active')
+    # Get all non-cancelled bookings (active, confirmed, delivered, etc.)
+    bookings = RentalBooking.where(product_id: product_id, size: size)
+                            .where.not(status: 'CANCELLED')
                             .select(:start_date, :end_date)
 
     booked_dates = []
     bookings.each do |booking|
       current_date = booking.start_date.to_date
-      while current_date <= booking.end_date.to_date
+      end_date = booking.end_date.to_date
+      while current_date <= end_date
         booked_dates << current_date.to_s
-        current_date += 1.day
+        current_date = current_date + 1
       end
     end
 
-    booked_dates.uniq
+    booked_dates.uniq.sort
   end
 
   def self.create_booking(user:, product_id:, start_date:, end_date:, size:, address:)

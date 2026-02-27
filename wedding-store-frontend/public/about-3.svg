@@ -1,0 +1,35 @@
+<svg viewBox="0 0 800 1000" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8f0e8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e8dcc8;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#grad3)"/>
+  
+  <!-- Wedding theme decorations -->
+  <g transform="translate(400, 300)">
+    <!-- Decorative arch -->
+    <path d="M-150 200 Q-150 0 0 0 Q150 0 150 200" fill="none" stroke="#d4a574" stroke-width="3" opacity="0.5"/>
+    <path d="M-120 200 Q-120 30 0 30 Q120 30 120 200" fill="none" stroke="#d4a574" stroke-width="2" opacity="0.4"/>
+    <path d="M-90 200 Q-90 60 0 60 Q90 60 90 200" fill="none" stroke="#d4a574" stroke-width="2" opacity="0.3"/>
+    
+    <!-- Hanging decorations -->
+    <circle cx="-100" cy="180" r="8" fill="#c99564" opacity="0.6"/>
+    <circle cx="0" cy="160" r="8" fill="#c99564" opacity="0.6"/>
+    <circle cx="100" cy="180" r="8" fill="#c99564" opacity="0.6"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="400" y="600" font-family="Georgia, serif" font-size="44" font-weight="bold" fill="#8b6f47" text-anchor="middle">Every Detail</text>
+  <text x="400" y="650" font-family="Georgia, serif" font-size="44" font-weight="bold" fill="#8b6f47" text-anchor="middle">Perfected</text>
+  
+  <text x="400" y="730" font-family="Arial, sans-serif" font-size="16" fill="#a08060" text-anchor="middle">Professional cleaning &amp; tailoring</text>
+  <text x="400" y="760" font-family="Arial, sans-serif" font-size="16" fill="#a08060" text-anchor="middle">for every rental</text>
+  
+  <!-- Corner decorations -->
+  <path d="M0 0 L100 0 L0 100 Z" fill="#d4a574" opacity="0.2"/>
+  <path d="M800 0 L700 0 L800 100 Z" fill="#d4a574" opacity="0.2"/>
+  <path d="M0 1000 L100 1000 L0 900 Z" fill="#d4a574" opacity="0.2"/>
+  <path d="M800 1000 L700 1000 L800 900 Z" fill="#d4a574" opacity="0.2"/>
+</svg>

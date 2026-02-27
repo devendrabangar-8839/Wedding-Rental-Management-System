@@ -1,0 +1,43 @@
+<svg viewBox="0 0 800 1000" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="pgrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color="#faf5ed;stop-opacity:1" />
+      <stop offset="100%" style="stop-color="#f2e8d8;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#pgrad3)"/>
+  
+  <!-- Sparkles/Fitting icon representation -->
+  <g transform="translate(400, 300)">
+    <!-- Central star/sparkle -->
+    <g fill="#d4a574" opacity="0.6">
+      <polygon points="0,-100 20,-40 80,-40 35,0 50,60 0,25 -50,60 -35,0 -80,-40 -20,-40"/>
+    </g>
+    
+    <!-- Surrounding sparkles -->
+    <g fill="#c99564" opacity="0.5">
+      <polygon points="120,-80 130,-55 155,-55 135,-35 145,-10 120,-25 95,-10 105,-35 85,-55 110,-55"/>
+      <polygon points="-120,-80 -110,-55 -85,-55 -105,-35 -95,-10 -120,-25 -145,-10 -135,-35 -155,-55 -130,-55"/>
+    </g>
+    
+    <!-- Measuring tape representation -->
+    <path d="M-150 150 Q0 100 150 150" fill="none" stroke="#d4a574" stroke-width="4" opacity="0.6" stroke-dasharray="10,5"/>
+    <circle cx="-150" cy="150" r="8" fill="#d4a574" opacity="0.6"/>
+    <circle cx="150" cy="150" r="8" fill="#d4a574" opacity="0.6"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="400" y="650" font-family="Georgia, serif" font-size="72" font-weight="bold" fill="#8b6f47" text-anchor="middle">03</text>
+  <text x="400" y="720" font-family="Georgia, serif" font-size="32" font-weight="bold" fill="#8b6f47" text-anchor="middle">Professional Fitting</text>
+  
+  <text x="400" y="770" font-family="Arial, sans-serif" font-size="16" fill="#a08060" text-anchor="middle">Expert tailors ensure</text>
+  <text x="400" y="795" font-family="Arial, sans-serif" font-size="16" fill="#a08060" text-anchor="middle">a perfect fit for you</text>
+  
+  <!-- Decorative elements -->
+  <g fill="#d4a574" opacity="0.3">
+    <circle cx="100" cy="200" r="5"/>
+    <circle cx="700" cy="300" r="5"/>
+    <circle cx="150" cy="800" r="5"/>
+    <circle cx="650" cy="700" r="5"/>
+  </g>
+</svg>

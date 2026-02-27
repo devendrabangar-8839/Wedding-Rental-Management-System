@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
   before_action :authenticate_user
-  
+
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity
   rescue_from StandardError, with: :internal_server_error
@@ -12,6 +12,9 @@ class ApplicationController < ActionController::API
   private
 
   def authenticate_user
+    # Allow specific endpoints to skip authentication
+    return if controller_path == 'rental_bookings' && action_name == 'availability'
+
     header = request.headers['Authorization']
     token = header&.split(' ')&.last
     decoded = JsonWebToken.decode(token)
@@ -42,6 +45,10 @@ class ApplicationController < ActionController::API
   end
 
   def internal_server_error(e)
+    # Log the actual error for debugging
+    Rails.logger.error "Internal Server Error: #{e.message}"
+    Rails.logger.error e.backtrace.join("\n") if e.backtrace
+    
     # In production, hide stack trace and log to error tracker
     # For now, generic message
     render_error('An internal error occurred', :internal_server_error, 'internal_error')

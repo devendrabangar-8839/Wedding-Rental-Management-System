@@ -17,6 +17,7 @@ class RentalBookingsController < ApplicationController
   end
 
   def availability
+    # Public endpoint - no authentication required
     product_id = params[:product_id]
     size = params[:size]
 

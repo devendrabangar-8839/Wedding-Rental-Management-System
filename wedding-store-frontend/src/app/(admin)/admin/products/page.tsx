@@ -17,26 +17,13 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  product_type: 'rent' | 'sell' | 'both';
-  rent_price: number;
-  sale_price: number;
-  security_deposit: number;
-  total_quantity: number;
-  sizes: string[];
-  active: boolean;
-  image_url?: string;
-}
+import type { Product } from '@/types';
 
 const getProductImage = (product: Product): string => {
   if (product.image_url) {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
     // Add updated_at timestamp to prevent caching
-    const timestamp = product.updated_at ? new Date(product.updated_at).getTime() : Date.now();
+    const timestamp = product.updated_at != null ? new Date(product.updated_at).getTime() : Date.now();
     return `${apiUrl}${product.image_url}${product.image_url.includes('?') ? '&' : '?'}v=${timestamp}`;
   }
   return '';

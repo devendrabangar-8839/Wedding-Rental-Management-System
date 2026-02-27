@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ShoppingBag, ShieldCheck, Clock, ArrowRight, Star } from "lucide-react";
 import Image from "next/image";
+import { ProcessSection } from "@/components/shared/ProcessSection";
+import { AboutSection } from "@/components/shared/AboutSection";
 
 export default function LandingPage() {
   return (
@@ -45,47 +47,11 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* About Section */}
+      <AboutSection />
+
       {/* Process Section */}
-      <section className="py-32 bg-background" id="process">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-24 space-y-4">
-            <h2 className="text-5xl font-black tracking-tighter uppercase">Our Simple <span className="text-primary italic">Process</span></h2>
-            <p className="text-muted-foreground text-lg font-medium italic">From selection to delivery, we make sure you look stunning on your big day.</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20">
-            <div className="group space-y-8 bg-secondary/5 rounded-[3rem] p-12 border border-primary/5 hover:border-primary/20 transition-all duration-500">
-              <div className="w-20 h-20 rounded-3xl bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
-                <ShoppingBag className="w-10 h-10" />
-              </div>
-              <div className="space-y-4">
-                <h3 className="text-3xl font-black tracking-tight">01. Select</h3>
-                <p className="text-muted-foreground font-medium leading-relaxed text-lg">Browse our curated collection of designer bridal wear. Find the style that's you.</p>
-              </div>
-            </div>
-
-            <div className="group space-y-8 bg-secondary/5 rounded-[3rem] p-12 border border-primary/5 hover:border-primary/20 transition-all duration-500">
-              <div className="w-20 h-20 rounded-3xl bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
-                <Clock className="w-10 h-10" />
-              </div>
-              <div className="space-y-4">
-                <h3 className="text-3xl font-black tracking-tight">02. Book</h3>
-                <p className="text-muted-foreground font-medium leading-relaxed text-lg">Get your dream bridal wear set tailored with our effortless booking process, including professional fitting sessions.</p>
-              </div>
-            </div>
-
-            <div className="group space-y-8 bg-secondary/5 rounded-[3rem] p-12 border border-primary/5 hover:border-primary/20 transition-all duration-500">
-              <div className="w-20 h-20 rounded-3xl bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
-                <ShieldCheck className="w-10 h-10" />
-              </div>
-              <div className="space-y-4">
-                <h3 className="text-3xl font-black tracking-tight">03. Delivered</h3>
-                <p className="text-muted-foreground font-medium leading-relaxed text-lg">Receive your luxury attire, expertly cleaned and perfectly tailored for your event.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ProcessSection />
 
       {/* CTA Section */}
       <section className="py-24 bg-primary text-primary-foreground relative overflow-hidden">
