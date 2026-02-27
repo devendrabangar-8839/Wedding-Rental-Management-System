@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   
   resources :products
   resources :rental_bookings, only: [:create]
-  resources :orders, only: [:index, :show, :update] do
+  resources :orders, only: [:index, :show, :create, :update] do
     get 'my_orders', on: :collection
   end
 

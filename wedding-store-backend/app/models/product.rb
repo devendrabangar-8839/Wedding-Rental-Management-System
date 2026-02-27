@@ -4,6 +4,9 @@ class Product < ApplicationRecord
   has_many :order_items, dependent: :destroy
   has_many :rental_bookings, dependent: :destroy
 
+  scope :search_by_name, ->(query) { where('name ILIKE ?', "%#{query}%") if query.present? }
+  scope :by_type, ->(type) { where(product_type: type) if type.present? }
+
   validates :name, presence: true
   validates :product_type, presence: true
   validates :rent_price, numericality: { greater_than_or_equal_to: 0 }, if: -> { rent? || both? }

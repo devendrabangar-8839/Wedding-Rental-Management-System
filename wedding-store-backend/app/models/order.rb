@@ -3,6 +3,8 @@ class Order < ApplicationRecord
   has_many :order_items, dependent: :destroy
   has_many :rental_bookings, through: :order_items
 
+  accepts_nested_attributes_for :order_items
+
   enum :status, {
     pending: 'PENDING',
     confirmed: 'CONFIRMED',

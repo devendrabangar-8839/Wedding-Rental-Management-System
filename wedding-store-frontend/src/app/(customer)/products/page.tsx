@@ -13,12 +13,17 @@ import { useAuth } from '@/context/AuthContext';
 export default function ProductListingPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState('');
+  const [filteredType, setFilteredType] = useState<string | null>(null);
   const { user } = useAuth();
 
   useEffect(() => {
     const fetchProducts = async () => {
+      setLoading(true);
       try {
-        const response = await api.get('/products');
+        const response = await api.get('/products', {
+          params: { search, type: filteredType }
+        });
         setProducts(response.data);
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -27,8 +32,12 @@ export default function ProductListingPage() {
       }
     };
 
-    fetchProducts();
-  }, []);
+    const timer = setTimeout(() => {
+      fetchProducts();
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [search, filteredType]);
 
   return (
     <div className="container mx-auto px-4 py-16">
@@ -42,19 +51,48 @@ export default function ProductListingPage() {
             <p className="text-muted-foreground text-lg font-medium italic">Hand-picked luxury couture for royalty.</p>
           </div>
 
-          {user?.role === 'admin' && (
-            <Button className="h-16 px-8 rounded-full font-black uppercase tracking-widest bg-primary shadow-xl shadow-primary/20 hover:scale-105 transition-all">
-              <Plus className="mr-2 h-5 w-5" /> Add New Product
-            </Button>
-          )}
+          <div className="flex flex-col md:flex-row gap-4 flex-1 max-w-xl">
+            <div className="relative group flex-1">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
+              <Input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search styles, fabrics, or motifs..."
+                className="pl-12 h-14 rounded-2xl border-none bg-secondary/30 shadow-sm focus:ring-primary font-medium"
+              />
+            </div>
+            {user?.role === 'admin' && (
+              <Button className="h-14 px-8 rounded-2xl font-black uppercase tracking-widest bg-primary shadow-xl shadow-primary/20 hover:scale-105 transition-all">
+                <Plus className="mr-2 h-5 w-5" /> Add
+              </Button>
+            )}
+          </div>
         </div>
 
         {/* Filter Bar */}
         <div className="flex flex-wrap items-center justify-between gap-6 border-y border-primary/5 py-8">
           <div className="flex items-center gap-4 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
-            <Button variant="outline" className="rounded-full px-6 font-black uppercase text-xs tracking-widest h-11 border-primary/10">Category</Button>
-            <Button variant="outline" className="rounded-full px-6 font-black uppercase text-xs tracking-widest h-11 border-primary/10">Size</Button>
-            <Button variant="outline" className="rounded-full px-6 font-black uppercase text-xs tracking-widest h-11 border-primary/10">Price Range</Button>
+            <Button
+              variant={filteredType === null ? 'default' : 'outline'}
+              onClick={() => setFilteredType(null)}
+              className="rounded-full px-6 font-black uppercase text-xs tracking-widest h-11 border-primary/10"
+            >
+              All
+            </Button>
+            <Button
+              variant={filteredType === 'RENT' ? 'default' : 'outline'}
+              onClick={() => setFilteredType('RENT')}
+              className="rounded-full px-6 font-black uppercase text-xs tracking-widest h-11 border-primary/10"
+            >
+              For Rent
+            </Button>
+            <Button
+              variant={filteredType === 'SELL' ? 'default' : 'outline'}
+              onClick={() => setFilteredType('SELL')}
+              className="rounded-full px-6 font-black uppercase text-xs tracking-widest h-11 border-primary/10"
+            >
+              For Sale
+            </Button>
             <Button variant="ghost" size="icon" className="rounded-full h-11 w-11 hover:bg-primary/5">
               <SlidersHorizontal className="h-4 w-4" />
             </Button>

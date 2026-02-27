@@ -5,6 +5,8 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
+    @products = @products.search_by_name(params[:search])
+    @products = @products.by_type(params[:type])
     render json: @products
   end
 

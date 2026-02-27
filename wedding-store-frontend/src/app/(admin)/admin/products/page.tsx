@@ -7,12 +7,20 @@ import { Button } from '@/components/ui/button';
 import { StatusBadge } from '@/components/shared/StatusBadge';
 import { Plus, Edit, Trash2 } from 'lucide-react';
 
+import { AddProductModal } from '@/components/admin/AddProductModal';
+
 export default function AdminProductsPage() {
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+
+  const fetchProducts = () => {
+    setLoading(true);
+    api.get('/products').then(res => setProducts(res.data)).finally(() => setLoading(false));
+  };
 
   useEffect(() => {
-    api.get('/products').then(res => setProducts(res.data)).finally(() => setLoading(false));
+    fetchProducts();
   }, []);
 
   if (loading) return <div className="p-20 text-center font-black animate-pulse">INVENTORY SYNCING...</div>;
@@ -21,10 +29,20 @@ export default function AdminProductsPage() {
     <div className="space-y-12">
       <div className="flex justify-between items-end">
         <h1 className="text-5xl font-black tracking-tighter uppercase">Inventory <span className="text-primary italic">Control</span></h1>
-        <Button size="lg" className="h-16 px-10 rounded-2xl font-black shadow-2xl">
+        <Button
+          size="lg"
+          className="h-16 px-10 rounded-2xl font-black shadow-2xl"
+          onClick={() => setIsAddModalOpen(true)}
+        >
           <Plus className="mr-2 h-6 w-6" /> Add Product
         </Button>
       </div>
+
+      <AddProductModal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        onSuccess={fetchProducts}
+      />
       <div className="bg-background rounded-[3rem] shadow-2xl overflow-hidden">
         <Table>
           <TableHeader>

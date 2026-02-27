@@ -19,7 +19,10 @@ interface Booking {
 
 interface OrderItem {
   id: number;
-  product_name: string;
+  product: {
+    id: number;
+    name: string;
+  };
   quantity: number;
   size: string;
   price: number;
@@ -99,8 +102,8 @@ export default function OrdersPage() {
                   <div key={item.id} className="flex flex-col md:flex-row gap-8 items-start pb-8 border-b border-primary/5 last:border-0 last:pb-0">
                     <div className="relative w-32 aspect-[3/4] rounded-2xl overflow-hidden bg-secondary/20 shrink-0 shadow-lg">
                       <Image
-                        src={item.product_name === 'Maharani Gold Lehenga' ? '/lehenga.png' : item.product_name === 'Midnight Blue Sherwani' ? '/sherwani.png' : 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800&q=80'}
-                        alt={item.product_name}
+                        src={item.product?.name === 'Maharani Gold Lehenga' ? '/lehenga.png' : item.product?.name === 'Midnight Blue Sherwani' ? '/sherwani.png' : 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800&q=80'}
+                        alt={item.product?.name || "Product Image"}
                         fill
                         className="object-cover"
                       />
@@ -108,7 +111,7 @@ export default function OrdersPage() {
 
                     <div className="flex-1 space-y-4">
                       <div className="flex justify-between items-start">
-                        <h4 className="text-2xl font-black tracking-tighter uppercase">{item.product_name}</h4>
+                        <h4 className="text-2xl font-black tracking-tighter uppercase">{item.product?.name}</h4>
                         <span className="text-xl font-black text-primary italic">₹{item.price.toLocaleString()}</span>
                       </div>
 

@@ -53,16 +53,20 @@ export const BookingModal = ({ product, isOpen, onClose }: BookingModalProps) =>
       await api.post('/orders', {
         order: {
           address,
+          total_price: totalPayable,
+          deposit_total: deposit,
           order_items_attributes: [
             {
               product_id: product.id,
               quantity: 1,
+              price: product.rent_price,
               size: selectedSize,
               rental_booking_attributes: {
                 start_date: format(startDate, 'yyyy-MM-dd'),
                 end_date: format(endDate, 'yyyy-MM-dd'),
                 product_id: product.id,
-                size: selectedSize
+                size: selectedSize,
+                status: 'CONFIRMED'
               }
             }
           ]
@@ -97,6 +101,10 @@ export const BookingModal = ({ product, isOpen, onClose }: BookingModalProps) =>
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-y-auto p-0 border-none rounded-[3rem] shadow-2xl bg-background">
+        <DialogHeader className="sr-only">
+          <DialogTitle>Book {product.name}</DialogTitle>
+          <DialogDescription>Complete your rental booking for {product.name}</DialogDescription>
+        </DialogHeader>
         <div className="grid grid-cols-1 md:grid-cols-2">
           {/* Left Side: Summary */}
           <div className="bg-secondary/20 p-10 space-y-8">
@@ -139,8 +147,8 @@ export const BookingModal = ({ product, isOpen, onClose }: BookingModalProps) =>
                     key={size}
                     onClick={() => setSelectedSize(size)}
                     className={`h-12 min-w-[3rem] px-4 rounded-xl text-sm font-black transition-all ${selectedSize === size
-                        ? 'bg-primary text-white scale-110 shadow-lg shadow-primary/20'
-                        : 'bg-secondary/50 hover:bg-secondary border border-primary/5'
+                      ? 'bg-primary text-white scale-110 shadow-lg shadow-primary/20'
+                      : 'bg-secondary/50 hover:bg-secondary border border-primary/5'
                       }`}
                   >
                     {size}

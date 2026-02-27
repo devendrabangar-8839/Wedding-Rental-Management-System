@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { toast } from 'sonner';
 
 export const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000',
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -21,9 +22,14 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       if (typeof window !== 'undefined') {
         localStorage.removeItem('token');
-        // Redirect to login if needed, or handle in context
       }
     }
+
+    const message = error.response?.data?.error || error.response?.data?.message || 'A network error occurred';
+    toast.error(message, {
+      description: 'Please try again or contact support if the issue persists.',
+    });
+
     return Promise.reject(error);
   }
 );

@@ -4,16 +4,24 @@ class OrdersController < ApplicationController
 
   def index
     if @current_user.admin?
-      @orders = Order.all.order(created_at: :desc)
+      @orders = Order.preload(:user, order_items: :product).all.order(created_at: :desc)
     else
-      @orders = @current_user.orders.order(created_at: :desc)
+      @orders = @current_user.orders.preload(order_items: :product).order(created_at: :desc)
     end
-    render json: @orders
+    render json: @orders.as_json(include: { 
+      user: { only: [:email] },
+      order_items: { include: :product }
+    })
   end
 
-  def my_orders
-    @orders = @current_user.orders.order(created_at: :desc)
-    render json: @orders
+  def create
+    @order = @current_user.orders.build(order_params)
+    if @order.save
+      render json: @order, status: :created
+    else
+      puts "ORDER VALIDATION FAILED: #{@order.errors.full_messages}"
+      render json: { error: @order.errors.full_messages.join(', ') }, status: :unprocessable_entity
+    end
   end
 
   def show
@@ -39,6 +47,12 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:status)
+    params.require(:order).permit(
+      :status, :total_price, :deposit_total, :address,
+      order_items_attributes: [
+        :product_id, :quantity, :price, :size,
+        rental_booking_attributes: [:start_date, :end_date, :product_id, :size, :status]
+      ]
+    )
   end
 end
