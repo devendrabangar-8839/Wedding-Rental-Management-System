@@ -29,6 +29,13 @@ class BookingService
     end
 
     ActiveRecord::Base.transaction do
+      # Pessimistic locking to prevent race conditions
+      product.lock!
+
+      unless available?(product_id, start_date, end_date, size)
+        return { success: false, message: 'Product not available for selected dates/size' }
+      end
+
       days = (end_date.to_date - start_date.to_date).to_i + 1
       rent_total = product.rent_price * days
       deposit = product.security_deposit

@@ -10,6 +10,7 @@
 !/tmp/.keep
 
 # Ignore pid files
+/tmp/*
 /tmp/pids/*
 !/tmp/pids/
 !/tmp/pids/.keep

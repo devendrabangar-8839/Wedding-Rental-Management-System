@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_02_27_071623) do
+ActiveRecord::Schema[8.0].define(version: 2026_02_27_083534) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -39,8 +39,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_27_071623) do
 
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "status"
-    t.decimal "total_price"
+    t.string "status", null: false
+    t.decimal "total_price", null: false
     t.decimal "deposit_total"
     t.text "address"
     t.datetime "created_at", null: false
@@ -50,8 +50,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_27_071623) do
 
   create_table "payments", force: :cascade do |t|
     t.bigint "order_id", null: false
-    t.decimal "amount"
-    t.string "status"
+    t.decimal "amount", null: false
+    t.string "status", null: false
     t.string "transaction_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -59,15 +59,15 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_27_071623) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.text "description"
-    t.string "product_type"
+    t.string "product_type", null: false
     t.decimal "rent_price"
     t.decimal "sale_price"
     t.decimal "security_deposit"
-    t.integer "total_quantity"
+    t.integer "total_quantity", null: false
     t.jsonb "sizes"
-    t.boolean "active"
+    t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -75,21 +75,22 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_27_071623) do
   create_table "rental_bookings", force: :cascade do |t|
     t.bigint "order_item_id", null: false
     t.bigint "product_id", null: false
-    t.date "start_date"
-    t.date "end_date"
-    t.string "size"
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.string "size", null: false
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["end_date"], name: "index_rental_bookings_on_end_date"
     t.index ["order_item_id"], name: "index_rental_bookings_on_order_item_id"
+    t.index ["product_id", "size", "start_date", "end_date"], name: "idx_rental_integrity"
     t.index ["product_id"], name: "index_rental_bookings_on_product_id"
     t.index ["start_date"], name: "index_rental_bookings_on_start_date"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email"
-    t.string "password_digest"
+    t.string "email", null: false
+    t.string "password_digest", null: false
     t.integer "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
