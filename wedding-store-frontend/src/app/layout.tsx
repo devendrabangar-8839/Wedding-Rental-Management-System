@@ -9,8 +9,8 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
 export const metadata: Metadata = {
-  title: "Vivaah Luxe | Premium Wedding Rentals",
-  description: "Redefining wedding elegance with premium ethnic wear rentals.",
+  title: "Vows & Veils | Premium Wedding Rentals",
+  description: "Timeless elegance for your special day. Premium ethnic wear rentals.",
 };
 
 export default function RootLayout({

@@ -1,0 +1,52 @@
+# Ignore bundler config
+/.bundle
+
+# Ignore log files
+/log/*
+!/log/.keep
+
+# Ignore temp files
+/tmp/*
+!/tmp/.keep
+
+# Ignore pid files
+/tmp/pids/*
+!/tmp/pids/
+!/tmp/pids/.keep
+
+# Ignore storage (ActiveStorage)
+/storage/*
+!/storage/.keep
+
+# Ignore database
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
+# Ignore master key (important for security)
+/config/master.key
+
+# Ignore credentials
+/config/credentials/*.key
+
+# Ignore environment files
+.env
+.env.*
+
+# Ignore node modules (if using JS)
+/node_modules
+
+# Ignore yarn files
+/yarn-error.log
+
+# Ignore byebug history
+.byebug_history
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore coverage reports
+/coverage/
+
+# Ignore compiled assets
+/public/assets

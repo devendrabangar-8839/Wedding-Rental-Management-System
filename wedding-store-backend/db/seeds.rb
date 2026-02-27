@@ -1,65 +1,76 @@
-# Seed data for Wedding Rental MVP
+# Seed products from Stitch UI
+Product.destroy_all
 
-# Create Admin User
-admin = User.create!(
-  email: 'admin@wedding.com',
-  password: 'password123',
-  password_confirmation: 'password123',
-  role: :admin
-)
+products = [
+  {
+    name: "Maharani Gold Lehenga",
+    description: "A masterpiece of traditional craftsmanship featuring heavy zari and hand embroidery peacock motifs. Includes matching blouse and sheer net dupatta.",
+    product_type: "both",
+    rent_price: 6500,
+    sale_price: 45000,
+    security_deposit: 8000,
+    total_quantity: 5,
+    sizes: ["S", "M", "L", "XL"],
+    active: true
+  },
+  {
+    name: "Midnight Blue Sherwani",
+    description: "Elegant midnight blue velvet sherwani with intricate silver work. Perfect for a royal evening look.",
+    product_type: "both",
+    rent_price: 12000,
+    sale_price: 85000,
+    security_deposit: 15000,
+    total_quantity: 3,
+    sizes: ["M", "L", "XL"],
+    active: true
+  },
+  {
+    name: "Floral Bridal Lehenga",
+    description: "Exquisite floral patterns on soft silk, designed for the contemporary bride.",
+    product_type: "both",
+    rent_price: 25000,
+    sale_price: 150000,
+    security_deposit: 30000,
+    total_quantity: 2,
+    sizes: ["S", "M"],
+    active: true
+  },
+  {
+    name: "Royal Gold Bandhgala",
+    description: "Classic royal gold bandhgala with custom buttons and a sharp tailored fit.",
+    product_type: "both",
+    rent_price: 15000,
+    sale_price: 95000,
+    security_deposit: 20000,
+    total_quantity: 4,
+    sizes: ["M", "L", "XL"],
+    active: true
+  },
+  {
+    name: "Pastel Silk Saree",
+    description: "Graceful pastel silk saree with a traditional border and hand-woven details.",
+    product_type: "both",
+    rent_price: 10000,
+    sale_price: 65000,
+    security_deposit: 12000,
+    total_quantity: 6,
+    sizes: ["One Size"],
+    active: true
+  }
+]
 
-# Create Customer User
-customer = User.create!(
-  email: 'customer@test.com',
-  password: 'password123',
-  password_confirmation: 'password123',
-  role: :customer
-)
+products.each { |p| Product.create!(p) }
 
-# Create Products
-Product.create!(
-  name: 'Velvet Royal Sherwani',
-  description: 'A premium velvet sherwani with intricate gold embroidery. Perfect for wedding receptions.',
-  product_type: 'both',
-  rent_price: 5000,
-  sale_price: 25000,
-  security_deposit: 10000,
-  total_quantity: 5,
-  sizes: %w[S M L XL],
-  active: true
-)
+puts "Seeded #{Product.count} products from Vows & Veils catalog."
 
-Product.create!(
-  name: 'Midnight Blue Lehenga',
-  description: 'Stunning midnight blue lehenga with silver mirror work. Includes dupatta and blouse.',
-  product_type: 'rent',
-  rent_price: 7000,
-  security_deposit: 15000,
-  total_quantity: 3,
-  sizes: %w[M L],
-  active: true
-)
+# Admin User
+User.find_or_create_by!(email: 'admin@vowsandveils.com') do |u|
+  u.password = 'password123'
+  u.role = :admin
+end
 
-Product.create!(
-  name: 'Classic White Tuxedo',
-  description: 'Modern fit white tuxedo with black lapels. Includes jacket and trousers.',
-  product_type: 'both',
-  rent_price: 3500,
-  sale_price: 15000,
-  security_deposit: 5000,
-  total_quantity: 10,
-  sizes: %w[S M L XL XXL],
-  active: true
-)
-
-Product.create!(
-  name: 'Pink Floral Saree',
-  description: 'Elegant pink floral saree in georgette. Comes with stitched blouse.',
-  product_type: 'sell',
-  sale_price: 8000,
-  total_quantity: 20,
-  sizes: %w[Free],
-  active: true
-)
-
-puts "Seeded #{User.count} users and #{Product.count} products."
+# Customer User
+User.find_or_create_by!(email: 'customer@test.com') do |u|
+  u.password = 'password123'
+  u.role = :customer
+end

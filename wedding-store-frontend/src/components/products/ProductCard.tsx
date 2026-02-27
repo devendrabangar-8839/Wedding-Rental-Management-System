@@ -4,8 +4,10 @@ import { Product } from "@/types";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { StatusBadge } from "../shared/StatusBadge";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
-import { ShoppingBag } from "lucide-react";
+import Image from "next/image";
+import { ShoppingBag, ArrowRight, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ProductCardProps {
@@ -13,49 +15,58 @@ interface ProductCardProps {
   className?: string;
 }
 
-export function ProductCard({ product, className }: ProductCardProps) {
+export const ProductCard = ({ product }: ProductCardProps) => {
   return (
-    <Card className={cn("overflow-hidden group hover:shadow-2xl transition-all duration-500 border-none bg-secondary/10", className)}>
-      <div className="relative aspect-[4/5] overflow-hidden bg-secondary/30">
-        {/* Placeholder for Product Image */}
-        <div className="absolute inset-0 flex items-center justify-center text-muted-foreground/20 italic group-hover:scale-110 transition-transform duration-700">
-          <ShoppingBag className="w-24 h-24" />
-        </div>
+    <Link href={`/products/${product.id}`} className="group block h-full">
+      <Card className="h-full overflow-hidden border-none shadow-none bg-transparent group-hover:bg-secondary/5 transition-all duration-500 rounded-[2rem]">
+        <div className="relative aspect-[3/4] overflow-hidden rounded-[2rem] shadow-xl group-hover:shadow-2xl transition-all duration-500">
+          <Image
+            src={product.name === 'Maharani Gold Lehenga' ? '/lehenga.png' : product.name === 'Midnight Blue Sherwani' ? '/sherwani.png' : 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800&q=80'}
+            alt={product.name}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
+          />
 
-        <div className="absolute top-4 right-4 flex flex-col gap-2">
-          <StatusBadge status={product.product_type} className="shadow-sm backdrop-blur-md bg-background/50" />
-        </div>
-
-        {/* Hover Action */}
-        <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-          <Link href={`/products/${product.id}`}>
-            <Button className="rounded-full px-8 py-6 font-bold shadow-2xl">
-              View Selection
-            </Button>
-          </Link>
-        </div>
-      </div>
-
-      <CardContent className="p-6">
-        <div className="flex justify-between items-start mb-2">
-          <h3 className="text-xl font-bold tracking-tight line-clamp-1">{product.name}</h3>
-        </div>
-        <p className="text-sm text-muted-foreground line-clamp-2 mb-6 h-10">
-          {product.description}
-        </p>
-
-        <div className="flex items-center gap-4">
-          <div className="flex flex-col">
-            <span className="text-xs uppercase font-bold tracking-widest text-muted-foreground/60">Rent</span>
-            <span className="text-xl font-black text-primary">₹{product.rent_price}<span className="text-xs font-normal">/day</span></span>
+          {/* Status Badge */}
+          <div className="absolute top-6 left-6 flex flex-col gap-2">
+            <Badge className="bg-primary hover:bg-primary text-white font-black px-4 py-1.5 rounded-full text-[10px] uppercase tracking-[0.15em] border-none">
+              {product.product_type === 'rent' ? 'RENT' : 'BOTH'}
+            </Badge>
           </div>
-          <div className="h-10 w-px bg-border/50" />
-          <div className="flex flex-col">
-            <span className="text-xs uppercase font-bold tracking-widest text-muted-foreground/60">Sizes</span>
-            <span className="text-sm font-bold">{product.sizes.join(', ')}</span>
+
+          {/* Hover Overlay */}
+          <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+            <div className="w-16 h-16 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center -translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+              <ArrowRight className="text-primary h-6 w-6" />
+            </div>
           </div>
         </div>
-      </CardContent>
-    </Card>
+
+        <CardContent className="pt-8 px-2 space-y-3">
+          <div className="flex justify-between items-start">
+            <h3 className="text-xl font-black tracking-tight leading-none group-hover:text-primary transition-colors">{product.name}</h3>
+            <div className="flex items-center text-primary">
+              <Star className="h-3 w-3 fill-current" />
+              <span className="text-[10px] font-black ml-1 uppercase tracking-tighter italic">Featured</span>
+            </div>
+          </div>
+
+          <div className="space-y-1">
+            <div className="flex items-baseline gap-1">
+              <span className="text-2xl font-black text-primary italic">₹{product.rent_price.toLocaleString()}</span>
+              <span className="text-[10px] font-black uppercase text-muted-foreground tracking-widest">/ day</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="flex -space-x-1">
+                {['S', 'M', 'L'].map(s => (
+                  <div key={s} className="w-5 h-5 rounded-full border border-background bg-secondary flex items-center justify-center text-[8px] font-black">{s}</div>
+                ))}
+              </div>
+              <span className="text-[10px] uppercase font-black tracking-widest text-muted-foreground">Available</span>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </Link>
   );
-}
+};

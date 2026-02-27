@@ -297,3 +297,611 @@ Processing by ProductsController#index as HTML
 Completed 200 OK in 6ms (Views: 5.0ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
 
 
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:23:34 +0530
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:23:34 +0530
+Processing by ProductsController#index as HTML
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 4ms (Views: 3.5ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mProduct Load (26.6ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 29ms (Views: -4.6ms | ActiveRecord: 33.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='WeddingStoreBackend'*/[0m
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT "products".* FROM "products" /*application='WeddingStoreBackend'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='WeddingStoreBackend'*/[0m
+  [1m[36mOrderItem Load (1.5ms)[0m  [1m[34mSELECT "order_items".* FROM "order_items" WHERE "order_items"."product_id" = 1 /*application='WeddingStoreBackend'*/[0m
+  [1m[36mRentalBooking Load (1.3ms)[0m  [1m[34mSELECT "rental_bookings".* FROM "rental_bookings" WHERE "rental_bookings"."product_id" = 1 /*application='WeddingStoreBackend'*/[0m
+  [1m[36mProduct Destroy (0.9ms)[0m  [1m[31mDELETE FROM "products" WHERE "products"."id" = 1 /*application='WeddingStoreBackend'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT /*application='WeddingStoreBackend'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='WeddingStoreBackend'*/[0m
+  [1m[36mOrderItem Load (1.3ms)[0m  [1m[34mSELECT "order_items".* FROM "order_items" WHERE "order_items"."product_id" = 2 /*application='WeddingStoreBackend'*/[0m
+  [1m[36mRentalBooking Load (0.3ms)[0m  [1m[34mSELECT "rental_bookings".* FROM "rental_bookings" WHERE "rental_bookings"."product_id" = 2 /*application='WeddingStoreBackend'*/[0m
+  [1m[36mProduct Destroy (0.4ms)[0m  [1m[31mDELETE FROM "products" WHERE "products"."id" = 2 /*application='WeddingStoreBackend'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='WeddingStoreBackend'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='WeddingStoreBackend'*/[0m
+  [1m[36mOrderItem Load (1.1ms)[0m  [1m[34mSELECT "order_items".* FROM "order_items" WHERE "order_items"."product_id" = 3 /*application='WeddingStoreBackend'*/[0m
+  [1m[36mRentalBooking Load (0.3ms)[0m  [1m[34mSELECT "rental_bookings".* FROM "rental_bookings" WHERE "rental_bookings"."product_id" = 3 /*application='WeddingStoreBackend'*/[0m
+  [1m[36mProduct Destroy (0.3ms)[0m  [1m[31mDELETE FROM "products" WHERE "products"."id" = 3 /*application='WeddingStoreBackend'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='WeddingStoreBackend'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='WeddingStoreBackend'*/[0m
+  [1m[36mOrderItem Load (1.1ms)[0m  [1m[34mSELECT "order_items".* FROM "order_items" WHERE "order_items"."product_id" = 4 /*application='WeddingStoreBackend'*/[0m
+  [1m[36mRentalBooking Load (0.2ms)[0m  [1m[34mSELECT "rental_bookings".* FROM "rental_bookings" WHERE "rental_bookings"."product_id" = 4 /*application='WeddingStoreBackend'*/[0m
+  [1m[36mProduct Destroy (0.5ms)[0m  [1m[31mDELETE FROM "products" WHERE "products"."id" = 4 /*application='WeddingStoreBackend'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='WeddingStoreBackend'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='WeddingStoreBackend'*/[0m
+  [1m[36mProduct Create (2.0ms)[0m  [1m[32mINSERT INTO "products" ("name", "description", "product_type", "rent_price", "sale_price", "security_deposit", "total_quantity", "sizes", "active", "created_at", "updated_at") VALUES ('Maharani Gold Lehenga', 'A masterpiece of traditional craftsmanship featuring heavy zari and hand embroidery peacock motifs. Includes matching blouse and sheer net dupatta.', 'BOTH', 6500.0, 45000.0, 8000.0, 5, '["S","M","L","XL"]', TRUE, '2026-02-27 07:56:37.820463', '2026-02-27 07:56:37.820463') RETURNING "id" /*application='WeddingStoreBackend'*/[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT /*application='WeddingStoreBackend'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='WeddingStoreBackend'*/[0m
+  [1m[36mProduct Create (1.1ms)[0m  [1m[32mINSERT INTO "products" ("name", "description", "product_type", "rent_price", "sale_price", "security_deposit", "total_quantity", "sizes", "active", "created_at", "updated_at") VALUES ('Midnight Blue Sherwani', 'Elegant midnight blue velvet sherwani with intricate silver work. Perfect for a royal evening look.', 'BOTH', 12000.0, 85000.0, 15000.0, 3, '["M","L","XL"]', TRUE, '2026-02-27 07:56:37.826360', '2026-02-27 07:56:37.826360') RETURNING "id" /*application='WeddingStoreBackend'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='WeddingStoreBackend'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='WeddingStoreBackend'*/[0m
+  [1m[36mProduct Create (1.8ms)[0m  [1m[32mINSERT INTO "products" ("name", "description", "product_type", "rent_price", "sale_price", "security_deposit", "total_quantity", "sizes", "active", "created_at", "updated_at") VALUES ('Floral Bridal Lehenga', 'Exquisite floral patterns on soft silk, designed for the contemporary bride.', 'BOTH', 25000.0, 150000.0, 30000.0, 2, '["S","M"]', TRUE, '2026-02-27 07:56:37.830392', '2026-02-27 07:56:37.830392') RETURNING "id" /*application='WeddingStoreBackend'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='WeddingStoreBackend'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='WeddingStoreBackend'*/[0m
+  [1m[36mProduct Create (1.4ms)[0m  [1m[32mINSERT INTO "products" ("name", "description", "product_type", "rent_price", "sale_price", "security_deposit", "total_quantity", "sizes", "active", "created_at", "updated_at") VALUES ('Royal Gold Bandhgala', 'Classic royal gold bandhgala with custom buttons and a sharp tailored fit.', 'BOTH', 15000.0, 95000.0, 20000.0, 4, '["M","L","XL"]', TRUE, '2026-02-27 07:56:37.835028', '2026-02-27 07:56:37.835028') RETURNING "id" /*application='WeddingStoreBackend'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='WeddingStoreBackend'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='WeddingStoreBackend'*/[0m
+  [1m[36mProduct Create (1.1ms)[0m  [1m[32mINSERT INTO "products" ("name", "description", "product_type", "rent_price", "sale_price", "security_deposit", "total_quantity", "sizes", "active", "created_at", "updated_at") VALUES ('Pastel Silk Saree', 'Graceful pastel silk saree with a traditional border and hand-woven details.', 'BOTH', 10000.0, 65000.0, 12000.0, 6, '["One Size"]', TRUE, '2026-02-27 07:56:37.838863', '2026-02-27 07:56:37.838863') RETURNING "id" /*application='WeddingStoreBackend'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT /*application='WeddingStoreBackend'*/[0m
+  [1m[36mProduct Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "products" /*application='WeddingStoreBackend'*/[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'admin@vowsandveils.com' LIMIT 1 /*application='WeddingStoreBackend'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='WeddingStoreBackend'*/[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'admin@vowsandveils.com' LIMIT 1 /*application='WeddingStoreBackend'*/[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "role", "created_at", "updated_at") VALUES ('admin@vowsandveils.com', '$2a$12$tz9H7D.JoHDvLFCeROGi7uwOVrMD6c2llBPxIYNr.TaGFKW3s1/WG', 1, '2026-02-27 07:56:38.083368', '2026-02-27 07:56:38.083368') RETURNING "id" /*application='WeddingStoreBackend'*/[0m
+  [1m[36mTRANSACTION (7.0ms)[0m  [1m[35mCOMMIT /*application='WeddingStoreBackend'*/[0m
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'customer@test.com' LIMIT 1 /*application='WeddingStoreBackend'*/[0m
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:31:36 +0530
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (38.5ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 42ms (Views: -3.5ms | ActiveRecord: 45.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:34:22 +0530
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (3.9ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 63ms (Views: 46.5ms | ActiveRecord: 3.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:36:20 +0530
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:36:20 +0530
+Processing by ProductsController#index as HTML
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (1.8ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 25ms (Views: 22.5ms | ActiveRecord: 1.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mProduct Load (77.3ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 89ms (Views: 1.1ms | ActiveRecord: 87.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for ::1 at 2026-02-27 13:37:13 +0530
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (2.5ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 38ms (Views: 35.0ms | ActiveRecord: 2.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for ::1 at 2026-02-27 13:37:13 +0530
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.9ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 20ms (Views: 18.5ms | ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for ::1 at 2026-02-27 13:37:58 +0530
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (1.2ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 8ms (Views: 6.1ms | ActiveRecord: 1.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for ::1 at 2026-02-27 13:38:11 +0530
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (2.4ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 16ms (Views: 13.3ms | ActiveRecord: 2.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/favicon.ico" for ::1 at 2026-02-27 13:38:11 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/products/5" for ::1 at 2026-02-27 13:38:43 +0530
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mProduct Load (2.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = 5 LIMIT 1 /*action='show',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:40:in `set_product'
+Completed 200 OK in 117ms (Views: 1.7ms | ActiveRecord: 1.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started OPTIONS "/login" for ::1 at 2026-02-27 13:39:15 +0530
+  
+ActionController::RoutingError (No route matches [OPTIONS] "/login"):
+  
+Started GET "/products" for ::1 at 2026-02-27 13:42:19 +0530
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (1.0ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 9ms (Views: 7.7ms | ActiveRecord: 1.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:42:36 +0530
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (1.4ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 13ms (Views: 11.0ms | ActiveRecord: 1.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:42:39 +0530
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.8ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 7ms (Views: 5.9ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:42:43 +0530
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (4.4ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 19ms (Views: 13.9ms | ActiveRecord: 4.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:42:46 +0530
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (1.4ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 10ms (Views: 7.7ms | ActiveRecord: 1.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:42:52 +0530
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (1.9ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 7ms (Views: 5.3ms | ActiveRecord: 1.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for ::1 at 2026-02-27 13:43:01 +0530
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (2.6ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 14ms (Views: 10.6ms | ActiveRecord: 2.6ms (1 query, 0 cached) | GC: 1.6ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:43:04 +0530
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.8ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 5ms (Views: 4.0ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:43:04 +0530
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (1.4ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 14ms (Views: 12.4ms | ActiveRecord: 1.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:43:13 +0530
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 5ms (Views: 3.6ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for ::1 at 2026-02-27 13:43:18 +0530
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (1.3ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 7ms (Views: 5.0ms | ActiveRecord: 1.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for ::1 at 2026-02-27 13:43:29 +0530
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (1.2ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 7ms (Views: 5.4ms | ActiveRecord: 1.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:43:43 +0530
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 5ms (Views: 3.8ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:44:06 +0530
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (1.3ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 17ms (Views: 9.7ms | ActiveRecord: 4.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products/5" for ::1 at 2026-02-27 13:44:08 +0530
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mProduct Load (4.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = 5 LIMIT 1 /*action='show',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:40:in `set_product'
+Completed 200 OK in 24ms (Views: 0.8ms | ActiveRecord: 4.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products/5" for ::1 at 2026-02-27 13:44:42 +0530
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mProduct Load (5.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = 5 LIMIT 1 /*action='show',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:40:in `set_product'
+Completed 200 OK in 15ms (Views: 4.6ms | ActiveRecord: 5.2ms (1 query, 0 cached) | GC: 0.4ms)
+
+
+Started HEAD "/products" for ::1 at 2026-02-27 13:45:03 +0530
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (4.0ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 10ms (Views: 5.4ms | ActiveRecord: 3.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started HEAD "/products" for ::1 at 2026-02-27 13:45:26 +0530
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 5ms (Views: 4.3ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for ::1 at 2026-02-27 13:45:36 +0530
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.4ms)
+
+
+Started HEAD "/products" for ::1 at 2026-02-27 13:45:47 +0530
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.1ms)
+
+
+Started HEAD "/products" for ::1 at 2026-02-27 13:46:04 +0530
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 4ms (Views: 3.3ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started HEAD "/products" for 127.0.0.1 at 2026-02-27 13:46:21 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='WeddingStoreBackend'*/[0m
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (27.2ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 61ms (Views: 5.7ms | ActiveRecord: 36.6ms (1 query, 0 cached) | GC: 1.3ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:46:37 +0530
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:46:42 +0530
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.8ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 4ms (Views: 2.6ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:49:17 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='WeddingStoreBackend'*/[0m
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (25.7ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 66ms (Views: 9.2ms | ActiveRecord: 37.2ms (1 query, 0 cached) | GC: 1.0ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:49:25 +0530
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (1.7ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 12ms (Views: 9.9ms | ActiveRecord: 1.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:49:31 +0530
+Processing by ProductsController#index as HTML
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:49:31 +0530
+  [1m[36mProduct Load (3.6ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 9ms (Views: 5.1ms | ActiveRecord: 3.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (1.1ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 7ms (Views: 4.7ms | ActiveRecord: 1.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products/5" for 127.0.0.1 at 2026-02-27 13:49:44 +0530
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"5"}
+Started GET "/products/5" for 127.0.0.1 at 2026-02-27 13:49:44 +0530
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mProduct Load (19.7ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = 5 LIMIT 1 /*action='show',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:40:in `set_product'
+Completed 200 OK in 94ms (Views: 1.9ms | ActiveRecord: 19.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mProduct Load (70.9ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = 5 LIMIT 1 /*action='show',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:40:in `set_product'
+Completed 200 OK in 99ms (Views: 0.6ms | ActiveRecord: 81.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products/5" for 127.0.0.1 at 2026-02-27 13:50:03 +0530
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mProduct Load (1.0ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = 5 LIMIT 1 /*action='show',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:40:in `set_product'
+Completed 200 OK in 31ms (Views: 6.0ms | ActiveRecord: 1.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products/5" for 127.0.0.1 at 2026-02-27 13:50:03 +0530
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mProduct Load (1.8ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = 5 LIMIT 1 /*action='show',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:40:in `set_product'
+Completed 200 OK in 14ms (Views: 2.9ms | ActiveRecord: 1.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:50:05 +0530
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:50:05 +0530
+Processing by ProductsController#index as HTML
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (7.6ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 28ms (Views: 19.5ms | ActiveRecord: 7.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mProduct Load (30.3ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 46ms (Views: 15.1ms | ActiveRecord: 30.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products/6" for 127.0.0.1 at 2026-02-27 13:50:09 +0530
+Started GET "/products/6" for 127.0.0.1 at 2026-02-27 13:50:09 +0530
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"6"}
+Processing by ProductsController#show as HTML
+  [1m[36mProduct Load (8.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = 6 LIMIT 1 /*action='show',application='WeddingStoreBackend',controller='products'*/[0m
+  Parameters: {"id"=>"6"}
+  ↳ app/controllers/products_controller.rb:40:in `set_product'
+Completed 200 OK in 20ms (Views: 1.2ms | ActiveRecord: 8.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mProduct Load (28.0ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = 6 LIMIT 1 /*action='show',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:40:in `set_product'
+Completed 200 OK in 32ms (Views: 0.9ms | ActiveRecord: 28.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:50:11 +0530
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:50:11 +0530
+Processing by ProductsController#index as HTML
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (1.9ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 9ms (Views: 6.7ms | ActiveRecord: 1.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mProduct Load (6.9ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 15ms (Views: 8.0ms | ActiveRecord: 6.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products/5" for 127.0.0.1 at 2026-02-27 13:50:12 +0530
+Started GET "/products/5" for 127.0.0.1 at 2026-02-27 13:50:12 +0530
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mProduct Load (5.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = 5 LIMIT 1 /*action='show',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:40:in `set_product'
+Completed 200 OK in 18ms (Views: 0.7ms | ActiveRecord: 5.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mProduct Load (3.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = 5 LIMIT 1 /*action='show',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:40:in `set_product'
+Completed 200 OK in 10ms (Views: 2.4ms | ActiveRecord: 3.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:50:40 +0530
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (2.1ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 52ms (Views: 48.7ms | ActiveRecord: 1.9ms (1 query, 0 cached) | GC: 40.6ms)
+
+
+Started POST "/orders" for 127.0.0.1 at 2026-02-27 13:50:53 +0530
+  
+ActionController::RoutingError (No route matches [POST] "/orders"):
+  
+Started GET "/products/7" for 127.0.0.1 at 2026-02-27 13:51:04 +0530
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mProduct Load (4.7ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = 7 LIMIT 1 /*action='show',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:40:in `set_product'
+Completed 200 OK in 19ms (Views: 0.9ms | ActiveRecord: 4.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products/7" for 127.0.0.1 at 2026-02-27 13:51:04 +0530
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mProduct Load (3.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = 7 LIMIT 1 /*action='show',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:40:in `set_product'
+Completed 200 OK in 16ms (Views: 0.6ms | ActiveRecord: 3.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/orders" for 127.0.0.1 at 2026-02-27 13:51:17 +0530
+  
+ActionController::RoutingError (No route matches [POST] "/orders"):
+  
+Started POST "/orders" for 127.0.0.1 at 2026-02-27 13:51:18 +0530
+  
+ActionController::RoutingError (No route matches [POST] "/orders"):
+  
+Started POST "/orders" for 127.0.0.1 at 2026-02-27 13:51:38 +0530
+  
+ActionController::RoutingError (No route matches [POST] "/orders"):
+  
+Started POST "/orders" for 127.0.0.1 at 2026-02-27 13:51:39 +0530
+  
+ActionController::RoutingError (No route matches [POST] "/orders"):
+  
+Started POST "/orders" for 127.0.0.1 at 2026-02-27 13:51:39 +0530
+  
+ActionController::RoutingError (No route matches [POST] "/orders"):
+  
+Started GET "/products/5" for 127.0.0.1 at 2026-02-27 13:51:52 +0530
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mProduct Load (1.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = 5 LIMIT 1 /*action='show',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:40:in `set_product'
+Completed 200 OK in 6ms (Views: 1.7ms | ActiveRecord: 1.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products/5" for 127.0.0.1 at 2026-02-27 13:52:44 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='WeddingStoreBackend'*/[0m
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = 5 LIMIT 1 /*action='show',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:40:in `set_product'
+Completed 200 OK in 55ms (Views: 0.5ms | ActiveRecord: 40.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/orders" for 127.0.0.1 at 2026-02-27 13:53:01 +0530
+  
+ActionController::RoutingError (No route matches [POST] "/orders"):
+  
+Started POST "/orders" for 127.0.0.1 at 2026-02-27 13:53:02 +0530
+  
+ActionController::RoutingError (No route matches [POST] "/orders"):
+  
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:53:12 +0530
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:53:12 +0530
+Processing by ProductsController#index as HTML
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (1.4ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 5ms (Views: 2.8ms | ActiveRecord: 1.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mProduct Load (27.3ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 30ms (Views: -1.4ms | ActiveRecord: 31.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2026-02-27 13:54:12 +0530
+Processing by AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'admin@vowsandveils.com' LIMIT 1 /*action='login',application='WeddingStoreBackend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:5:in `login'
+Completed 200 OK in 245ms (Views: 0.3ms | ActiveRecord: 4.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:54:15 +0530
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:54:15 +0530
+Processing by ProductsController#index as HTML
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (1.5ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+Completed 200 OK in 3ms (Views: 1.8ms | ActiveRecord: 1.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products/5" for 127.0.0.1 at 2026-02-27 13:54:17 +0530
+Started GET "/products/5" for 127.0.0.1 at 2026-02-27 13:54:17 +0530
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"5"}
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mProduct Load (1.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = 5 LIMIT 1 /*action='show',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:40:in `set_product'
+Completed 200 OK in 4ms (Views: 0.3ms | ActiveRecord: 1.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mProduct Load (1.8ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = 5 LIMIT 1 /*action='show',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:40:in `set_product'
+Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 1.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:54:20 +0530
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:54:20 +0530
+Processing by ProductsController#index as HTML
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (1.0ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 4ms (Views: 2.9ms | ActiveRecord: 1.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mProduct Load (3.2ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 7ms (Views: 3.4ms | ActiveRecord: 3.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:54:30 +0530
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:54:30 +0530
+Processing by ProductsController#index as HTML
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mProduct Load (1.4ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 1.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products/5" for 127.0.0.1 at 2026-02-27 13:54:33 +0530
+Started GET "/products/5" for 127.0.0.1 at 2026-02-27 13:54:33 +0530
+Processing by ProductsController#show as HTML
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"5"}
+  Parameters: {"id"=>"5"}
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = 5 LIMIT 1 /*action='show',application='WeddingStoreBackend',controller='products'*/[0m
+  [1m[36mProduct Load (1.9ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = 5 LIMIT 1 /*action='show',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:40:in `set_product'
+  ↳ app/controllers/products_controller.rb:40:in `set_product'
+Completed 200 OK in 4ms (Views: 0.5ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Completed 200 OK in 8ms (Views: 0.6ms | ActiveRecord: 1.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/orders" for 127.0.0.1 at 2026-02-27 13:55:49 +0530
+  
+ActionController::RoutingError (No route matches [POST] "/orders"):
+  
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:56:01 +0530
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.9ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 6ms (Views: 4.5ms | ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2026-02-27 13:56:01 +0530
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='WeddingStoreBackend',controller='products'*/[0m
+  ↳ app/controllers/products_controller.rb:8:in `index'
+Completed 200 OK in 4ms (Views: 2.7ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.1ms)
+
+
