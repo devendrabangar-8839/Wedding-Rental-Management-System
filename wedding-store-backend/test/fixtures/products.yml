@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  product_type: MyString
+  rent_price: 9.99
+  sale_price: 9.99
+  security_deposit: 9.99
+  total_quantity: 1
+  sizes: 
+  active: false
+
+two:
+  name: MyString
+  description: MyText
+  product_type: MyString
+  rent_price: 9.99
+  sale_price: 9.99
+  security_deposit: 9.99
+  total_quantity: 1
+  sizes: 
+  active: false
